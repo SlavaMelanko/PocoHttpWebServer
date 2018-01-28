@@ -10,7 +10,7 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 add_executable(${PROJECT_NAME}
 	${CMAKE_CURRENT_BINARY_DIR}/Version.h
 	${SOURCES}
-	)
+)
 
 target_link_libraries(${PROJECT_NAME}
 	${CONAN_LIBS}
