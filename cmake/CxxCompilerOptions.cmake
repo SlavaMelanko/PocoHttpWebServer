@@ -48,7 +48,6 @@ else ()
 		-Wctor-dtor-privacy \
 		-Wno-missing-braces \
 		-Wnon-virtual-dtor \
-		-Wold-style-cast \
 		-Woverloaded-virtual \
 		-Wpedantic \
 		-Wshadow \
