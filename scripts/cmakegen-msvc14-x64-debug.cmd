@@ -20,6 +20,7 @@ conan install ^
     -s build_type=%BUILD_CONFIGURATION% ^
     -s compiler="Visual Studio" ^
     -s compiler.version=%VS_VERSION% ^
+    -s compiler.runtime="MTd" ^
     ../..
 
 echo [CMake] Generating the project...
