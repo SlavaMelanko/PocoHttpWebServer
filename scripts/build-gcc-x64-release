@@ -36,6 +36,7 @@ PrintInfoMsg "[Conan] Downloading packages..."
 conan install \
     --build missing \
     -s build_type=${BUILD_MODE} \
+    -s compiler.runtime="MT" \
     ../..
 CheckError "[Conan] Failed to download and install required packages."
 
