@@ -1,8 +1,8 @@
 language: cpp
 
-dist: trusty
 sudo: required
-group: edge
+dist: trusty
+group: deprecated-2017Q4
 
 matrix:
   include:
