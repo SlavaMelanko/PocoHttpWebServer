@@ -56,10 +56,13 @@ install:
   # Set the ${CXX} variable properly.
   - export CXX=${CXX_COMPILER}
   - ${CXX} --version
-  # Set the ${CC} variable properly.
+  # Set up the environment.
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+	  # The makedepend package contains a C-preprocessor like utility to determine build-time dependencies.
+	  # Fix OpenSSL issue during building: "/util/domd: 33: ../util/domd: makedepend: not found"
       sudo apt-get install xutils-dev
+	  # Set the ${CC} variable properly.
       export CC=${CC_COMPILER}
       ${CC} --version
     fi
@@ -67,7 +70,6 @@ install:
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p "${DEPS_DIR}"
   - cd "${DEPS_DIR}"
-
   # Install a recent CMake (unless already installed on macOS) and Conan.
   - CMAKE_VERSION=3.9.5
   - |
@@ -81,6 +83,7 @@ install:
       brew install cmake || brew upgrade cmake
       brew install conan || brew upgrade conan
     fi
+
 before_script:
   - conan --version
   - cmake --version
