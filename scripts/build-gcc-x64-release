@@ -34,7 +34,7 @@ cd ${BUILD_DIR}
 
 PrintInfoMsg "[Conan] Downloading packages..."
 conan install \
-    --build missing \
+    --build \
     -s build_type=${BUILD_MODE} \
     ../..
 CheckError "[Conan] Failed to download and install required packages."
