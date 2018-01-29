@@ -59,10 +59,10 @@ install:
   # Set up the environment.
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-    # The makedepend package contains a C-preprocessor like utility to determine build-time dependencies.
-    # Fix OpenSSL issue during building: "/util/domd: 33: ../util/domd: makedepend: not found"
+      # Fix OpenSSL issue during building: "/util/domd: 33: ../util/domd: makedepend: not found".
+      # The makedepend package contains a C-preprocessor like utility to determine build-time dependencies.
       sudo apt-get install xutils-dev
-    # Set the ${CC} variable properly.
+      # Set the ${CC} variable properly.
       export CC=${CC_COMPILER}
       ${CC} --version
     fi
