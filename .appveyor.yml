@@ -55,7 +55,8 @@ before_build:
         --build missing `
         -s build_type=$env:CONFIGURATION `
         -s compiler="Visual Studio" `
-        -s compiler.version=$env:vs_version
+        -s compiler.version=$env:vs_version `
+        -s compiler.runtime="MT"
 
       Write-Output "[CMake] Generating the project..."
       cmake .. -G "$env:generator"
