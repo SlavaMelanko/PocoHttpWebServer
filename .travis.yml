@@ -2,7 +2,6 @@ language: cpp
 
 sudo: required
 dist: trusty
-group: deprecated-2017Q4
 
 matrix:
   include:
@@ -60,6 +59,7 @@ install:
   # Set the ${CC} variable properly.
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      sudo apt-get install xutils-dev
       export CC=${CC_COMPILER}
       ${CC} --version
     fi
