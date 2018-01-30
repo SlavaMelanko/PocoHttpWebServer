@@ -46,6 +46,12 @@ before_build:
         $env:generator="$env:generator Win64"
       }
       Write-Output generator="$env:generator"
+      
+      if ($env:CONFIGURATION -eq "Release") {
+        $env:vs_runtime="MT"
+      } else {
+        $env:vs_runtime="MTd"
+      }
 
       Write-Output "Creating a build directory..."
       (mkdir build) -and (cd build)
@@ -56,7 +62,7 @@ before_build:
         -s build_type=$env:CONFIGURATION `
         -s compiler="Visual Studio" `
         -s compiler.version=$env:vs_version `
-        -s compiler.runtime="MT"
+        -s compiler.runtime=$env:vs_runtime
 
       Write-Output "[CMake] Generating the project..."
       cmake .. -G "$env:generator"
