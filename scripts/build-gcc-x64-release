@@ -34,7 +34,7 @@ cd ${BUILD_DIR}
 
 PrintInfoMsg "[Conan] Downloading packages..."
 conan install \
-    --build \
+    --build missing \
     -s build_type=${BUILD_MODE} \
     -s compiler.libcxx=libstdc++11 \
     ../..
@@ -54,3 +54,5 @@ PrintInfoMsg "[Make] Building the project..."
 make -j $CPU_COUNT &> build.log
 
 PrintInfoMsg "Project has been built successfully!"
+
+exit
