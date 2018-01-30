@@ -1,6 +1,9 @@
 # Use an official and the latest GCC image.
 FROM gcc
 
+# Set the author field of the generated image.
+LABEL maintainer="Slava Melanko"
+
 # Install the latest CMake.
 ADD https://cmake.org/files/v3.10/cmake-3.10.0-Linux-x86_64.sh /cmake-3.10.0-Linux-x86_64.sh
 RUN mkdir /opt/cmake

@@ -8,7 +8,15 @@ image:
 init:
   - git config --global core.autocrlf input
 
-clone_folder: c:\projects\smela
+skip_commits:
+  files:
+    - docker/**/*
+    - scripts/**/*
+    - .travis.yml
+    - '**/*.md'
+    - '**/*.txt'
+
+clone_folder: c:\projects\dev
 
 # Fetch repository as zip archive.
 shallow_clone: true
