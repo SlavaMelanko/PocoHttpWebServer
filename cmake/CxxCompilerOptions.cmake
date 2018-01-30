@@ -16,9 +16,9 @@ if (MSVC14 OR MSVC15)
 		/EHsc
 		# Display level 1, level 2, and level 3 warnings, and all
 		# level 4 (informational) warnings that are not turned off by default.
-		/W4
+		/W3
 		# Treat all compiler warnings as errors.
-		/WX
+		#/WX
 	)
 
 	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
