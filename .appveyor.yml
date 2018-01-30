@@ -11,6 +11,7 @@ init:
 skip_commits:
   files:
     - docker/**/*
+    - docs/**/*
     - scripts/**/*
     - .travis.yml
     - '**/*.md'
