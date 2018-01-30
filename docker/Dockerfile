@@ -35,11 +35,13 @@ WORKDIR /projects
 # Copy the github repo into the container at $WORKDIR directory.
 RUN git clone https://github.com/SMelanko/PocoHttpWebServer.git
 # Build the project.
-WORKDIR PocoHttpWebServer/scripts
-RUN chmod +x build-gcc-x64-release
-RUN ./build-gcc-x64-release
+WORKDIR PocoHttpWebServer/build
+RUN conan install .. --build missing -s build_type=Release -s compiler.libcxx=libstdc++11
+RUN cmake .. -DCMAKE_BUILD_TYPE:STRING=Release
+RUN cmake --build . --config Release
 
 # Run HTTP WEB server.
-WORKDIR ../build/gcc-x64-Release/bin
+WORKDIR bin
 
-#CMD ["./server"]
+CMD ["./server"]
+
