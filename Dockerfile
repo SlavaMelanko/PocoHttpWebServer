@@ -27,8 +27,19 @@ RUN pip install -q --no-cache-dir conan
 RUN conan user
 RUN conan --version
 
-# Set the working directory.
-WORKDIR ~/projects
+# Make port 80 available to the world outside this container.
+EXPOSE 80
 
+# Set the working directory.
+WORKDIR /projects
 # Copy the github repo into the container at $WORKDIR directory.
 RUN git clone https://github.com/SMelanko/PocoHttpWebServer.git
+# Build the project.
+WORKDIR PocoHttpWebServer/scripts
+RUN chmod +x build-gcc-x64-release
+RUN ./build-gcc-x64-release
+
+# Run HTTP WEB server.
+WORKDIR ../build/gcc-x64-Release/bin
+
+#CMD ["./server"]
