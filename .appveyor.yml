@@ -15,7 +15,6 @@ skip_commits:
     - scripts/**/*
     - .travis.yml
     - '**/*.md'
-    - '**/*.txt'
 
 clone_folder: c:\projects\dev
 
