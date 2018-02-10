@@ -1,5 +1,6 @@
 [requires]
 Poco/1.8.1@pocoproject/stable
+catch2/2.1.1@bincrafters/stable
 
 [generators]
 cmake
