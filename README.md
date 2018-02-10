@@ -5,3 +5,5 @@ This is the example of HTTP WEB server (written using C++ Poco library) which is
 [![GitHub version](https://badge.fury.io/gh/SMelanko%2FPocoHttpWebServer.svg)](https://badge.fury.io/gh/SMelanko%2FPocoHttpWebServer)
 [![Build Status: Linux, OSX](https://travis-ci.org/SMelanko/PocoHttpWebServer.svg?branch=master)](https://travis-ci.org/SMelanko/PocoHttpWebServer)
 [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/github/SMelanko/PocoHttpWebServer?branch=master&svg=true)](https://ci.appveyor.com/project/SMelanko/PocoHttpWebServer)
+[![codecov](https://codecov.io/gh/SMelanko/PocoHttpWebServer/branch/master/graph/badge.svg)](https://codecov.io/gh/SMelanko/PocoHttpWebServer)
+[![Coverage Status](https://coveralls.io/repos/github/SMelanko/PocoHttpWebServer/badge.svg?branch=master)](https://coveralls.io/github/SMelanko/PocoHttpWebServer?branch=master)
