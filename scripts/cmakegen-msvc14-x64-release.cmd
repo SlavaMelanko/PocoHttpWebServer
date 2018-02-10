@@ -16,18 +16,18 @@ pushd %BUILD_DIR%
 
 echo [Conan] Downloading packages...
 conan install ^
-    --build missing ^
-    -s build_type=%BUILD_CONFIGURATION% ^
-    -s compiler="Visual Studio" ^
-    -s compiler.version=%VS_VERSION% ^
-    -s compiler.runtime="MT" ^
-    ../..
+	--build missing ^
+	-s build_type=%BUILD_CONFIGURATION% ^
+	-s compiler="Visual Studio" ^
+	-s compiler.version=%VS_VERSION% ^
+	-s compiler.runtime="MT" ^
+	../..
 
 echo [CMake] Generating the project...
 cmake ^
-    -G "Visual Studio %VS_VERSION% %VS_YEAR% %VS_ARCH%" ^
-    "-DCMAKE_BUILD_TYPE:STRING=%BUILD_CONFIGURATION%" ^
-    ../..
+	-G "Visual Studio %VS_VERSION% %VS_YEAR% %VS_ARCH%" ^
+	-DCMAKE_BUILD_TYPE:STRING=%BUILD_CONFIGURATION% ^
+	../..
 
 echo Project has been generated successfully!
 popd

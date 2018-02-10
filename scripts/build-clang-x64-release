@@ -4,7 +4,6 @@
 BUILD_MODE=Release
 BUILD_ARCH=x64
 BUILD_DIR=../build/clang-${BUILD_ARCH}-${BUILD_MODE}
-COVERAGE=FALSE
 
 # Color configuration.
 COLOR_OFF='\033[0m'
@@ -43,8 +42,7 @@ CheckError "[Conan] Failed to download and install required packages."
 PrintInfoMsg "[CMake] Generating the project..."
 cmake \
 	-G Xcode \
-	"-DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE}" \
-	"-DENABLE_COVERAGE:BOOL=${COVERAGE}" \
+	-DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
 	../..
 CheckError "[CMake] Failed to generate the project."
 
