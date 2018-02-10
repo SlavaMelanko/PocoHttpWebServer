@@ -59,6 +59,9 @@ install:
   # Set up the environment.
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      # Fix OpenSSL issue during building: "/util/domd: 33: ../util/domd: makedepend: not found".
+      # The makedepend package contains a C-preprocessor like utility to determine build-time dependencies.
+      sudo apt-get install xutils-dev
       # Set the ${CC} variable properly.
       export CC=${CC_COMPILER}
       ${CC} --version
@@ -86,7 +89,7 @@ before_script:
   - cmake --version
   - cd "${TRAVIS_BUILD_DIR}"
   - mkdir -p build && cd build
-  - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
+  - conan install .. --build -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
   - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE}
 
 script:
