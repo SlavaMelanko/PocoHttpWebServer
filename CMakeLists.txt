@@ -23,4 +23,4 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 # Set global include directories, libraries directories, definitions, etc.
 conan_basic_setup()
 
-add_subdirectory(modules/server)
+add_subdirectory(modules/http-server)
