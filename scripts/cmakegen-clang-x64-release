@@ -42,7 +42,7 @@ CheckError "[Conan] Failed to download and install required packages."
 PrintInfoMsg "[CMake] Generating the project..."
 cmake \
 	-G Xcode \
-	"-DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE}" \
+	-DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
 	../..
 CheckError "[CMake] Failed to generate the project."
 

@@ -43,8 +43,8 @@ CheckError "[Conan] Failed to download and install required packages."
 PrintInfoMsg "[CMake] Generating the project..."
 cmake \
     -G "Unix Makefiles" \
-    "-DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE}" \
-    "-Wno-dev" \
+    -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+    -Wno-dev \
     ../..
 CheckError "[CMake] Failed to generate the project."
 
