@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-#include <Poco/DateTimeFormat.h>
-#include <Poco/DateTimeFormatter.h>
 #include <Poco/Net/HTTPServerRequest.h>
 #include <Poco/Net/HTTPServerResponse.h>
 #include <Poco/Timestamp.h>
 #include <Poco/Util/ServerApplication.h>
+
+#include <utils/Chrono.h>
 
 void TimeRequestHandler::handleRequest(Poco::Net::HTTPServerRequest& request,
 	Poco::Net::HTTPServerResponse& response)
@@ -16,17 +16,13 @@ void TimeRequestHandler::handleRequest(Poco::Net::HTTPServerRequest& request,
 	app.logger().information(
 		"Request from " + request.clientAddress().toString());
 
-	Poco::Timestamp now;
-	std::string dt = Poco::DateTimeFormatter::format(now,
-		Poco::DateTimeFormat::SORTABLE_FORMAT);
-
 	response.setChunkedTransferEncoding(true);
 	response.setContentType("text/html");
 
 	std::ostream& ostr = response.send();
-	ostr << "<html><head><title>HTTPTimeServer powered by POCO C++ Libraries</title>";
+	ostr << "<html><head><title>HTTPTimeServer powered by POCO</title>";
 	ostr << "<meta http-equiv=\"refresh\" content=\"1\"></head>";
 	ostr << "<body><p style=\"text-align: center; font-size: 48px;\">";
-	ostr << dt;
+	ostr << utils::chrono::GetCurrentDateTime();
 	ostr << "</p></body></html>";
 }

@@ -25,6 +25,7 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 add_subdirectory(modules/http-server)
+add_subdirectory(modules/utils)
 
 if (ENABLE_TESTING)
 	enable_testing()

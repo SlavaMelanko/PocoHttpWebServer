@@ -1,6 +1,8 @@
 #include "HttpServer.h"
 #include "RequestRouter.h"
 
+#include <iostream>
+
 #include <Poco/ThreadPool.h>
 #include <Poco/Net/HTTPServer.h>
 #include <Poco/Net/HTTPServerParams.h>
