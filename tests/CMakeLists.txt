@@ -33,3 +33,22 @@ include_directories(catch-lib
 
 add_library(catch-lib STATIC Test.cpp)
 add_dependencies(catch-lib catch)
+
+function(do_test name)
+	include_directories(catch-lib
+		../modules/utils/include
+	)
+	add_executable(${name} ${name}.cpp)
+	target_link_libraries(${name}
+		utils
+		catch-lib
+	)
+	add_dependencies(${name}
+		catch
+	)
+	add_test(${name} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${name})
+	# Group all tests under tests directory.
+	set_property(TARGET ${name} PROPERTY FOLDER "tests")
+endfunction()
+
+do_test(ChronoTest)
