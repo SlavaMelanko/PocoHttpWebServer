@@ -11,38 +11,38 @@ matrix:
     #
 
     # GCC 5.
-    - env: CXX_COMPILER=g++-5 CC_COMPILER=gcc-5 BUILD_TYPE=Debug
+    - env: CXX_COMPILER=g++-5 CC_COMPILER=gcc-5 BUILD_TYPE=Debug ENABLE_TESTING=FALSE ENABLE_COVERAGE=FALSE
       os: linux
       addons: &gcc5
         apt:
           packages: g++-5
           sources: ubuntu-toolchain-r-test
 
-    - env: CXX_COMPILER=g++-5 CC_COMPILER=gcc-5 BUILD_TYPE=Release
+    - env: CXX_COMPILER=g++-5 CC_COMPILER=gcc-5 BUILD_TYPE=Release ENABLE_TESTING=FALSE ENABLE_COVERAGE=FALSE
       os: linux
       addons: *gcc5
 
     # GCC 6.
-    - env: CXX_COMPILER=g++-6 CC_COMPILER=gcc-6 BUILD_TYPE=Debug
+    - env: CXX_COMPILER=g++-6 CC_COMPILER=gcc-6 BUILD_TYPE=Debug ENABLE_TESTING=FALSE ENABLE_COVERAGE=FALSE
       os: linux
       addons: &gcc6
         apt:
           packages: g++-6
           sources: ubuntu-toolchain-r-test
 
-    - env: CXX_COMPILER=g++-6 CC_COMPILER=gcc-6 BUILD_TYPE=Release
+    - env: CXX_COMPILER=g++-6 CC_COMPILER=gcc-6 BUILD_TYPE=Release ENABLE_TESTING=FALSE ENABLE_COVERAGE=FALSE
       os: linux
       addons: *gcc6
 
     # GCC 7.
-    - env: CXX_COMPILER=g++-7 CC_COMPILER=gcc-7 BUILD_TYPE=Debug
+    - env: CXX_COMPILER=g++-7 CC_COMPILER=gcc-7 BUILD_TYPE=Debug ENABLE_TESTING=TRUE ENABLE_COVERAGE=TRUE
       os: linux
       addons: &gcc7
         apt:
           packages: g++-7
           sources: ubuntu-toolchain-r-test
 
-    - env: CXX_COMPILER=g++-7 CC_COMPILER=gcc-7 BUILD_TYPE=Release
+    - env: CXX_COMPILER=g++-7 CC_COMPILER=gcc-7 BUILD_TYPE=Release ENABLE_TESTING=TRUE ENABLE_COVERAGE=TRUE
       os: linux
       addons: *gcc7
 
@@ -90,8 +90,10 @@ before_script:
   - cd "${TRAVIS_BUILD_DIR}"
   - mkdir -p build && cd build
   - conan install .. --build -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
-  - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE}
+  - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} -DENABLE_TESTING:BOOL=${ENABLE_TESTING} -DENABLE_COVERAGE:BOOL=${ENABLE_COVERAGE}
 
 script:
   - cmake --build . --config ${BUILD_TYPE}
+  - ctest --extra-verbose --parallel 2
+  - bash <(curl -s https://codecov.io/bash)
 
