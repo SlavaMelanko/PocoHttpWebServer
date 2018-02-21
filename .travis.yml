@@ -42,7 +42,7 @@ matrix:
           packages: g++-7
           sources: ubuntu-toolchain-r-test
 
-    - env: CXX_COMPILER=g++-7 CC_COMPILER=gcc-7 BUILD_TYPE=Release ENABLE_TESTING=TRUE ENABLE_COVERAGE=TRUE
+    - env: CXX_COMPILER=g++-7 CC_COMPILER=gcc-7 BUILD_TYPE=Release ENABLE_TESTING=FALSE ENABLE_COVERAGE=FALSE
       os: linux
       addons: *gcc7
 
