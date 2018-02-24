@@ -21,6 +21,7 @@ matrix:
       addons: &gcc5
         apt:
           packages:
+            - gcc-5
             - g++-5
             - libssl-dev
           sources:
@@ -46,6 +47,7 @@ matrix:
       addons: &gcc6
         apt:
           packages:
+            - gcc-6
             - g++-6
             - libssl-dev
           sources:
@@ -71,6 +73,7 @@ matrix:
       addons: &gcc7
         apt:
           packages:
+            - gcc-7
             - g++-7
             - libssl-dev
           sources:
@@ -116,7 +119,7 @@ install:
     if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
       # Fix OpenSSL issue during building: "/util/domd: 33: ../util/domd: makedepend: not found".
       # The makedepend package contains a C-preprocessor like utility to determine build-time dependencies.
-      sudo apt-get install xutils-dev
+      #sudo apt-get install xutils-dev
       # Set the ${CC} variable properly.
       export CC=${CC_COMPILER}
       ${CC} --version
