@@ -140,7 +140,7 @@ before_script:
   - cmake --version
   - cd "${TRAVIS_BUILD_DIR}"
   - mkdir -p build && cd build
-  - conan install .. --build -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
+  - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
   - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} -DENABLE_TESTING:BOOL=${ENABLE_TESTING} -DENABLE_COVERAGE:BOOL=${ENABLE_COVERAGE}
 
 script:
