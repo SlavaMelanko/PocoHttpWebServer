@@ -13,8 +13,8 @@ matrix:
     # GCC 5.
     - os: linux
       env:
-        - CXX_COMPILER=g++-5
         - CC_COMPILER=gcc-5
+        - CXX_COMPILER=g++-5
         - BUILD_TYPE=Debug
         - ENABLE_TESTING=FALSE
         - ENABLE_COVERAGE=FALSE
@@ -29,8 +29,8 @@ matrix:
 
     - os: linux
       env:
-        - CXX_COMPILER=g++-5
         - CC_COMPILER=gcc-5
+        - CXX_COMPILER=g++-5
         - BUILD_TYPE=Release
         - ENABLE_TESTING=FALSE
         - ENABLE_COVERAGE=FALSE
@@ -39,8 +39,8 @@ matrix:
     # GCC 6.
     - os: linux
       env:
-        - CXX_COMPILER=g++-6
         - CC_COMPILER=gcc-6
+        - CXX_COMPILER=g++-6
         - BUILD_TYPE=Debug
         - ENABLE_TESTING=FALSE
         - ENABLE_COVERAGE=FALSE
@@ -55,8 +55,8 @@ matrix:
 
     - os: linux
       env:
-        - CXX_COMPILER=g++-6
         - CC_COMPILER=gcc-6
+        - CXX_COMPILER=g++-6
         - BUILD_TYPE=Release
         - ENABLE_TESTING=FALSE
         - ENABLE_COVERAGE=FALSE
@@ -65,8 +65,8 @@ matrix:
     # GCC 7.
     - os: linux
       env:
-        - CXX_COMPILER=g++-7
         - CC_COMPILER=gcc-7
+        - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
         - ENABLE_TESTING=FALSE
         - ENABLE_COVERAGE=FALSE
@@ -81,8 +81,8 @@ matrix:
 
     - os: linux
       env:
-        - CXX_COMPILER=g++-7
         - CC_COMPILER=gcc-7
+        - CXX_COMPILER=g++-7
         - BUILD_TYPE=Release
         - ENABLE_TESTING=FALSE
         - ENABLE_COVERAGE=FALSE
@@ -90,8 +90,8 @@ matrix:
 
     - os: linux
       env:
-        - CXX_COMPILER=g++-7
         - CC_COMPILER=gcc-7
+        - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
         - ENABLE_TESTING=TRUE
         - ENABLE_COVERAGE=TRUE
@@ -111,19 +111,20 @@ before_install:
     fi
 
 install:
-  # Set the ${CXX} variable properly.
-  - export CXX=${CXX_COMPILER}
-  - ${CXX} --version
   # Set up the environment.
   - |
     if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
       # Fix OpenSSL issue during building: "/util/domd: 33: ../util/domd: makedepend: not found".
       # The makedepend package contains a C-preprocessor like utility to determine build-time dependencies.
-      #sudo apt-get install xutils-dev
+      sudo apt-get install xutils-dev
       # Set the ${CC} variable properly.
       export CC=${CC_COMPILER}
       ${CC} --version
     fi
+  # Set the ${CXX} variable properly.
+  - export CXX=${CXX_COMPILER}
+  - ${CXX} --version
+
   # Dependencies required by the CI are installed in ${TRAVIS_BUILD_DIR}/deps/.
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p "${DEPS_DIR}" && cd "${DEPS_DIR}"
@@ -147,7 +148,9 @@ before_script:
   - cd "${TRAVIS_BUILD_DIR}"
   - mkdir -p build && cd build
   - conan install .. --build -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
-  - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} -DENABLE_TESTING:BOOL=${ENABLE_TESTING} -DENABLE_COVERAGE:BOOL=${ENABLE_COVERAGE}
+  - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+    -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
+    -DENABLE_COVERAGE:BOOL=${ENABLE_COVERAGE}
 
 script:
   - cmake --build . --config ${BUILD_TYPE}
