@@ -31,3 +31,7 @@ if (ENABLE_TESTING)
 	enable_testing()
 	add_subdirectory(tests)
 endif ()
+
+if (ENABLE_CPPCHECK)
+	include(Cppcheck)
+endif ()
