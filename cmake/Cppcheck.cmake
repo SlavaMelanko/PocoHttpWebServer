@@ -34,20 +34,17 @@ ExternalProject_Add(
 )
 
 list(APPEND CPPCHECK_ARGS
-	# Enable all checks.
-	--enable=all
-	# Set default standard.
-	--std=c++11
-	# More detailed error reports.
-	--verbose
-	# If errors are found, integer 1 is returned instead of default 0.
-	--error-exitcode=1
 	# Forces cppcheck to check all files as the given language.
 	--language=c++
-	# Give path to search for include files.
-	-I ${CMAKE_SOURCE_DIR}/modules/utils/include
-	${CMAKE_SOURCE_DIR}/modules/utils/include/*.h
-	${CMAKE_SOURCE_DIR}/modules/utils/src/*.cpp
+	# Set default standard.
+	--std=c++11
+	# Enable all checks.
+	--enable=all
+	# More detailed error reports.
+	--verbose
+	# Suppress a specific warning.
+	--suppress=missingIncludeSystem
+	${CMAKE_SOURCE_DIR}/modules
 )
 
 add_custom_target(
