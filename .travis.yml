@@ -16,8 +16,6 @@ matrix:
         - CC_COMPILER=gcc-5
         - CXX_COMPILER=g++-5
         - BUILD_TYPE=Debug
-        - ENABLE_TESTING=FALSE
-        - ENABLE_COVERAGE=FALSE
       addons: &gcc5
         apt:
           packages:
@@ -32,8 +30,6 @@ matrix:
         - CC_COMPILER=gcc-5
         - CXX_COMPILER=g++-5
         - BUILD_TYPE=Release
-        - ENABLE_TESTING=FALSE
-        - ENABLE_COVERAGE=FALSE
       addons: *gcc5
 
     # GCC 6.
@@ -42,8 +38,6 @@ matrix:
         - CC_COMPILER=gcc-6
         - CXX_COMPILER=g++-6
         - BUILD_TYPE=Debug
-        - ENABLE_TESTING=FALSE
-        - ENABLE_COVERAGE=FALSE
       addons: &gcc6
         apt:
           packages:
@@ -58,8 +52,6 @@ matrix:
         - CC_COMPILER=gcc-6
         - CXX_COMPILER=g++-6
         - BUILD_TYPE=Release
-        - ENABLE_TESTING=FALSE
-        - ENABLE_COVERAGE=FALSE
       addons: *gcc6
 
     # GCC 7.
@@ -68,8 +60,6 @@ matrix:
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
-        - ENABLE_TESTING=FALSE
-        - ENABLE_COVERAGE=FALSE
       addons: &gcc7
         apt:
           packages:
@@ -84,8 +74,6 @@ matrix:
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Release
-        - ENABLE_TESTING=FALSE
-        - ENABLE_COVERAGE=FALSE
       addons: *gcc7
 
     - os: linux
@@ -95,6 +83,14 @@ matrix:
         - BUILD_TYPE=Debug
         - ENABLE_TESTING=TRUE
         - ENABLE_COVERAGE=TRUE
+      addons: *gcc7
+
+    - os: linux
+      env:
+        - CC_COMPILER=gcc-7
+        - CXX_COMPILER=g++-7
+        - BUILD_TYPE=Debug
+        - ENABLE_CPPCHECK=TRUE
       addons: *gcc7
 
   exclude:
@@ -155,6 +151,10 @@ script:
 
 after_success:
   - ctest --extra-verbose --parallel 2
+  - |
+    if [ ${ENABLE_CPPCHECK} == TRUE ]; then
+      make check
+    fi
   - |
     if [ "${TRAVIS_OS_NAME}" == "linux" ] && [ ${ENABLE_TESTING} == TRUE ] && [ ${ENABLE_COVERAGE} == TRUE ]; then
       # Codecov - upload the report.
