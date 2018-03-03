@@ -1,7 +1,9 @@
 [requires]
+zlib/1.2.11@conan/stable
 Poco/1.8.0@pocoproject/stable
 
 [options]
+zlib:shared=False
 Poco:shared=False
 
 [generators]
