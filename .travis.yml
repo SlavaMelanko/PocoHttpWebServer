@@ -26,11 +26,14 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
       script:
-        - cd "${TRAVIS_BUILD_DIR}"
-        - mkdir -p build && cd build
-        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
-        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE}
+        - |
+          cd "${TRAVIS_BUILD_DIR}"
+          mkdir -p build && cd build
+          conan install .. --build missing \
+            -s build_type=${BUILD_TYPE} \
+            -s compiler.libcxx=libstdc++11
+          cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
+          cmake --build . --config ${BUILD_TYPE}
 
     #
     # GCC 6 Release.
@@ -48,33 +51,14 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
       script:
-        - cd "${TRAVIS_BUILD_DIR}"
-        - mkdir -p build && cd build
-        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
-        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE}
-
-    #
-    # GCC 7 Debug.
-    #
-    - os: linux
-      env:
-        - CC_COMPILER=gcc-7
-        - CXX_COMPILER=g++-7
-        - BUILD_TYPE=Debug
-      addons: &gcc7
-        apt:
-          packages:
-            - gcc-7
-            - g++-7
-          sources:
-            - ubuntu-toolchain-r-test
-      script:
-        - cd "${TRAVIS_BUILD_DIR}"
-        - mkdir -p build && cd build
-        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++
-        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE}
+        - |
+          cd "${TRAVIS_BUILD_DIR}"
+          mkdir -p build && cd build
+          conan install .. --build missing \
+            -s build_type=${BUILD_TYPE} \
+            -s compiler.libcxx=libstdc++11
+          cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
+          cmake --build . --config ${BUILD_TYPE}
 
     #
     # GCC 7 Release.
@@ -106,14 +90,17 @@ matrix:
       before_install:
         - pip install --user cpp-coveralls
       script:
-        - cd "${TRAVIS_BUILD_DIR}" && mkdir -p build && cd build
-        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
         - |
+          cd "${TRAVIS_BUILD_DIR}"
+          mkdir -p build && cd build
+          conan install .. --build missing \
+            -s build_type=${BUILD_TYPE} \
+            -s compiler.libcxx=libstdc++11
           cmake .. \
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
             -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
             -DENABLE_COVERAGE:BOOL=${ENABLE_COVERAGE}
-        - cmake --build . --config ${BUILD_TYPE}
+          cmake --build . --config ${BUILD_TYPE}
       after_success:
         - ctest --extra-verbose --parallel 2
         - |
@@ -138,14 +125,16 @@ matrix:
         - ENABLE_CPPCHECK=TRUE
       addons: *gcc7
       script:
-        - cd "${TRAVIS_BUILD_DIR}"
-        - mkdir -p build && cd build
-        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
         - |
+          cd "${TRAVIS_BUILD_DIR}"
+          mkdir -p build && cd build
+          conan install .. --build missing \
+            -s build_type=${BUILD_TYPE} \
+            -s compiler.libcxx=libstdc++11
           cmake .. \
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
             -DENABLE_CPPCHECK:BOOL=${ENABLE_CPPCHECK}
-        - cmake --build . --config ${BUILD_TYPE}
+          cmake --build . --config ${BUILD_TYPE}
       after_success:
         - make check
 
@@ -159,9 +148,6 @@ install:
   # Set up the environment.
   - |
     if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
-      # Fix OpenSSL issue during building: "/util/domd: 33: ../util/domd: makedepend: not found".
-      # The makedepend package contains a C-preprocessor like utility to determine build-time dependencies.
-      #sudo apt-get install xutils-dev
       # Set the ${CC} variable properly.
       export CC=${CC_COMPILER}
       ${CC} --version
