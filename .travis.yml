@@ -54,7 +54,9 @@ matrix:
         - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
         - cmake --build . --config ${BUILD_TYPE}
 
+    #
     # GCC 7 Debug.
+    #
     - os: linux
       env:
         - CC_COMPILER=gcc-7
@@ -65,16 +67,18 @@ matrix:
           packages:
             - gcc-7
             - g++-7
-            - libssl-dev
           sources:
             - ubuntu-toolchain-r-test
       script:
-        - cd "${TRAVIS_BUILD_DIR}" && mkdir -p build && cd build
-        - conan install .. --build -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
-        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE}
+        - cd "${TRAVIS_BUILD_DIR}"
+        - mkdir -p build && cd build
+        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
+        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
         - cmake --build . --config ${BUILD_TYPE}
 
+    #
     # GCC 7 Release.
+    #
     - os: linux
       env:
         - CC_COMPILER=gcc-7
@@ -82,12 +86,15 @@ matrix:
         - BUILD_TYPE=Release
       addons: *gcc7
       script:
-        - cd "${TRAVIS_BUILD_DIR}" && mkdir -p build && cd build
-        - conan install .. --build -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
-        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE}
+        - cd "${TRAVIS_BUILD_DIR}"
+        - mkdir -p build && cd build
+        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
+        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
         - cmake --build . --config ${BUILD_TYPE}
 
-    # GCC 7 Debug with Cdecov and Coveralls.
+    #
+    # GCC 7 Debug with Codecov and Coveralls.
+    #
     - os: linux
       env:
         - CC_COMPILER=gcc-7
@@ -97,10 +104,10 @@ matrix:
         - ENABLE_COVERAGE=TRUE
       addons: *gcc7
       before_install:
-        pip install --user cpp-coveralls
+        - pip install --user cpp-coveralls
       script:
         - cd "${TRAVIS_BUILD_DIR}" && mkdir -p build && cd build
-        - conan install .. --build -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
+        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
         - |
           cmake .. \
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
@@ -120,7 +127,9 @@ matrix:
             -e cmake \
             -E ".*CMakeFiles.*"
 
+    #
     # GCC 7 Debug with Cppcheck.
+    #
     - os: linux
       env:
         - CC_COMPILER=gcc-7
@@ -129,8 +138,9 @@ matrix:
         - ENABLE_CPPCHECK=TRUE
       addons: *gcc7
       script:
-        - cd "${TRAVIS_BUILD_DIR}" && mkdir -p build && cd build
-        - conan install .. --build -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
+        - cd "${TRAVIS_BUILD_DIR}"
+        - mkdir -p build && cd build
+        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
         - |
           cmake .. \
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
