@@ -77,3 +77,6 @@ before_build:
 
 build_script:
   - cmake --build . --config %CONFIGURATION% -- /m /v:minimal
+
+test_script:
+  - ctest --extra-verbose --parallel 2
