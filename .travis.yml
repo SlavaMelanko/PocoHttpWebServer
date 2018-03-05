@@ -86,15 +86,8 @@ matrix:
       script:
         - cd "${TRAVIS_BUILD_DIR}"
         - mkdir -p build && cd build
-        - |
-          conan install .. --build missing \
-            -s build_type=${BUILD_TYPE} \
-            -s compiler.libcxx=libstdc++11
-        - |
-          cmake .. \
-            -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
-            -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
-            -DENABLE_COVERAGE:BOOL=${ENABLE_COVERAGE}
+        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
+        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} -DENABLE_TESTING:BOOL=${ENABLE_TESTING} -DENABLE_COVERAGE:BOOL=${ENABLE_COVERAGE}
         - cmake --build . --config ${BUILD_TYPE}
       after_success:
         - ctest --extra-verbose --parallel 2
@@ -126,10 +119,12 @@ matrix:
           conan install .. --build missing \
             -s build_type=${BUILD_TYPE} \
             -s compiler.libcxx=libstdc++11
+
         - |
           cmake .. \
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
             -DENABLE_CPPCHECK:BOOL=${ENABLE_CPPCHECK}
+
         - cmake --build . --config ${BUILD_TYPE}
       after_success:
         - make check
@@ -148,6 +143,7 @@ install:
       export CC=${CC_COMPILER}
       ${CC} --version
     fi
+
   # Set the ${CXX} variable properly.
   - export CXX=${CXX_COMPILER}
   - ${CXX} --version
