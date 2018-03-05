@@ -28,7 +28,10 @@ matrix:
       script:
         - cd "${TRAVIS_BUILD_DIR}"
         - mkdir -p build && cd build
-        - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
+        - |
+          conan install .. --build missing \
+            -s build_type=${BUILD_TYPE} \
+            -s compiler.libcxx=libstdc++11
         - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
         - cmake --build . --config ${BUILD_TYPE}
 
@@ -62,7 +65,13 @@ matrix:
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Release
-      addons: *gcc7
+      addons: &gcc7
+        apt:
+          packages:
+            - gcc-7
+            - g++-7
+          sources:
+            - ubuntu-toolchain-r-test
       script:
         - cd "${TRAVIS_BUILD_DIR}"
         - mkdir -p build && cd build
@@ -87,7 +96,11 @@ matrix:
         - cd "${TRAVIS_BUILD_DIR}"
         - mkdir -p build && cd build
         - conan install .. --build missing -s build_type=${BUILD_TYPE} -s compiler.libcxx=libstdc++11
-        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} -DENABLE_TESTING:BOOL=${ENABLE_TESTING} -DENABLE_COVERAGE:BOOL=${ENABLE_COVERAGE}
+        - |
+          cmake .. \
+            -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+            -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
+            -DENABLE_COVERAGE:BOOL=${ENABLE_COVERAGE}
         - cmake --build . --config ${BUILD_TYPE}
       after_success:
         - ctest --extra-verbose --parallel 2
