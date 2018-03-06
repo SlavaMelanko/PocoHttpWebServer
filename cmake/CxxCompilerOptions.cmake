@@ -34,7 +34,7 @@ else ()
 	elseif (COMPILER_SUPPORTS_CXX11)
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 	else ()
-		message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11/14 support. "
+		message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} does not have C++11/14 support. "
 			"Please use a different C++ compiler.")
 			return()
 	endif ()
@@ -54,9 +54,4 @@ else ()
 	)
 #	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 #	https://stackoverflow.com/questions/13238511/xcode-clang-clang-warning-argument-unused-during-compilation-fcheck-new
-
-	if (ENABLE_COVERAGE)
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
-		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
-	endif ()
 endif ()
