@@ -14,7 +14,7 @@ if (ENABLE_CLANG_TIDY)
 endif ()
 
 if (MSVC)
-	message(WARNING "Coverage does not work on Windows")
+	message(WARNING "There is no Windows support")
 else ()
 	find_program(CLANG_TIDY_BIN clang-tidy-4.0)
 

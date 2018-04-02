@@ -203,6 +203,40 @@ matrix:
       after_success:
         - make check
 
+    #
+    # GCC 7 Debug with Clang-Tidy.
+    #
+    - os: linux
+      env:
+        - CC_COMPILER=gcc-7
+        - CXX_COMPILER=g++-7
+        - BUILD_TYPE=Debug
+        - ENABLE_CLANG_TIDY=TRUE
+      addons:
+        apt:
+          packages:
+            - gcc-7
+            - g++-7
+            - clang-4.0
+            - clang-tidy-4.0
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-4.0
+      script:
+        - cd "${TRAVIS_BUILD_DIR}"
+        - mkdir -p build && cd build
+        - |
+          conan install .. --build missing \
+            -s build_type=${BUILD_TYPE} \
+            -s compiler.libcxx=libstdc++11
+        - |
+          cmake .. \
+            -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+            -DENABLE_CLANG_TIDY:BOOL=${ENABLE_CLANG_TIDY}
+        - cmake --build . --config ${BUILD_TYPE}
+      after_success:
+        - make tidy
+
   exclude:
     - os: osx
       compiler: gcc
