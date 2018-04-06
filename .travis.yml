@@ -47,6 +47,21 @@ matrix:
     #
 
     #
+    # Git Check
+    #
+    - os: linux
+      env:
+        - TEST="Git Check"
+      script:
+        - |
+          if [[ -n $(git diff --check HEAD^) ]]; then
+            echo "You must remove whitespaces before submitting a pull request"
+            echo ""
+            git diff --check HEAD^
+            exit -1
+          fi
+
+    #
     # GCC 5 Release.
     #
     - os: linux
@@ -197,12 +212,10 @@ install:
     if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
       # Set the ${CC} variable properly.
       export CC=${CC_COMPILER}
-      ${CC} --version
     fi
 
   # Set the ${CXX} variable properly.
   - export CXX=${CXX_COMPILER}
-  - ${CXX} --version
 
   # Dependencies required by the CI are installed in ${TRAVIS_BUILD_DIR}/deps/.
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
