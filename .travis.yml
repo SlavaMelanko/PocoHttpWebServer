@@ -235,8 +235,8 @@ matrix:
           packages:
             - gcc-7
             - g++-7
-            - clang-5.0
-            - clang-tidy-5.0
+            - clang-4.0
+            - clang-tools-4.0
           sources:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-4.0
