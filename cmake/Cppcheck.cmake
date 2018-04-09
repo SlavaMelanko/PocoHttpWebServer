@@ -5,6 +5,10 @@
 # Install and prepare a tool for static C/C++ code analysis.
 #
 
+if (NOT ENABLE_CPPCHECK)
+	return ()
+endif ()
+
 list(APPEND CPPCHECK_CMAKE_ARGS
 	"-DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}"
 )

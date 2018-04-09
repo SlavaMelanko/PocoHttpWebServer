@@ -41,5 +41,5 @@ if (ENABLE_CPPCHECK)
 endif ()
 
 if (ENABLE_CLANG_TIDY)
-	include(ClangTydi)
+	include(ClangTidy)
 endif ()

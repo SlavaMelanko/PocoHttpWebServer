@@ -4,8 +4,9 @@
 BUILD_MODE=Release
 BUILD_ARCH=x64
 BUILD_DIR=../build/gcc-${BUILD_ARCH}-${BUILD_MODE}
-ENABLE_TESTING=TRUE
-ENABLE_CPPCHECK=TRUE
+ENABLE_TESTING=FALSE
+ENABLE_CPPCHECK=FALSE
+ENABLE_CLANG_TIDY=FALSE
 
 # Color configuration.
 COLOR_OFF='\033[0m'
@@ -48,6 +49,8 @@ cmake \
     -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
     -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
     -DENABLE_CPPCHECK:BOOL=${ENABLE_CPPCHECK} \
+    -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=${ENABLE_CLANG_TIDY} \
+    -DENABLE_CLANG_TIDY:BOOL=${ENABLE_CLANG_TIDY} \
     -Wno-dev \
     ../..
 CheckError "[CMake] Failed to generate the project."
@@ -66,7 +69,12 @@ if [ "$ENABLE_TESTING" = TRUE ]; then
 fi
 
 if [ "${ENABLE_CPPCHECK}" = TRUE ]; then
-    PrintInfoMsg "Performing code analysis..."
+    PrintInfoMsg "[Cppcheck] Performing code analysis..."
     make check
+fi
+
+if [ "${ENABLE_CLANG_TIDY}" = TRUE ]; then
+    PrintInfoMsg "[Clang-Tidy] Performing code analysis..."
+    make tidy
 fi
 

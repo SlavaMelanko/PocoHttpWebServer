@@ -9,28 +9,28 @@
 # clang-tidy is modular and provides a convenient interface for writing new checks.
 #
 
-if (ENABLE_CLANG_TIDY)
+if (NOT ENABLE_CLANG_TIDY)
 	return ()
 endif ()
 
 if (MSVC)
 	message(WARNING "There is no Windows support")
 else ()
-	find_program(CLANG_TIDY_BIN clang-tidy-4.0)
+	find_program(CLANG_TIDY_BIN clang-tidy-6.0)
 
 	if (CLANG_TIDY_BIN STREQUAL "CLANG_TIDY_BIN-NOTFOUND")
-		message(FATAL_ERROR "Unable to locate clang-tidy-4.0")
+		message(FATAL_ERROR "Unable to locate clang-tidy-6.0")
 	endif ()
 
-	find_program(RUN_CLANG_TIDY_BIN run-clang-tidy-4.0.py)
+	find_program(RUN_CLANG_TIDY_BIN run-clang-tidy-6.0.py)
 
 	if (RUN_CLANG_TIDY_BIN STREQUAL "RUN_CLANG_TIDY_BIN-NOTFOUND")
-		message(FATAL_ERROR "Unable to locate run-clang-tidy-4.0.py")
+		message(FATAL_ERROR "Unable to locate run-clang-tidy-6.0.py")
 	endif ()
 
 	list(APPEND RUN_CLANG_TIDY_BIN_ARGS
 		-clang-tidy-binary ${CLANG_TIDY_BIN}
-		-header-filter=.*
+		-header-filter='../modules'
 		-checks=clan*,cert*,misc*,perf*,cppc*,read*,mode*,-cert-err58-cpp,-misc-noexcept-move-constructor
 	)
 
