@@ -16,16 +16,18 @@ endif ()
 if (MSVC)
 	message(WARNING "There is no Windows support")
 else ()
-	find_program(CLANG_TIDY_BIN clang-tidy-6.0)
+	CLANG_TIDY_VERSION="5.0"
+
+	find_program(CLANG_TIDY_BIN clang-tidy-${CLANG_TIDY_VERSION})
 
 	if (CLANG_TIDY_BIN STREQUAL "CLANG_TIDY_BIN-NOTFOUND")
-		message(FATAL_ERROR "Unable to locate clang-tidy-6.0")
+		message(FATAL_ERROR "Unable to locate clang-tidy-${CLANG_TIDY_VERSION}")
 	endif ()
 
-	find_program(RUN_CLANG_TIDY_BIN run-clang-tidy-6.0.py)
+	find_program(RUN_CLANG_TIDY_BIN run-clang-tidy-${CLANG_TIDY_VERSION}.py)
 
 	if (RUN_CLANG_TIDY_BIN STREQUAL "RUN_CLANG_TIDY_BIN-NOTFOUND")
-		message(FATAL_ERROR "Unable to locate run-clang-tidy-6.0.py")
+		message(FATAL_ERROR "Unable to locate run-clang-tidy-${CLANG_TIDY_VERSION}.py")
 	endif ()
 
 	list(APPEND RUN_CLANG_TIDY_BIN_ARGS

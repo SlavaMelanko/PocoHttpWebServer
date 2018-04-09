@@ -15,6 +15,7 @@ matrix:
     #
     - os: osx
       env:
+        - BUILD_ENV="Xcode 8.0 Release"
         - CXX_COMPILER=clang++
         - BUILD_TYPE=Release
       osx_image: xcode8.0
@@ -31,6 +32,7 @@ matrix:
     #
     - os: osx
       env:
+        - BUILD_ENV="Xcode 9.0 Release"
         - CXX_COMPILER=clang++
         - BUILD_TYPE=Release
       osx_image: xcode9.0
@@ -47,6 +49,7 @@ matrix:
     #
     - os: osx
       env:
+        - BUILD_ENV="Xcode 9.0 Debug with tests"
         - CXX_COMPILER=clang++
         - BUILD_TYPE=Debug
       osx_image: xcode9.0
@@ -65,7 +68,7 @@ matrix:
     #
 
     #
-    # Git Check
+    # Git Check.
     #
     - os: linux
       env:
@@ -232,8 +235,8 @@ matrix:
           packages:
             - gcc-7
             - g++-7
-            - clang-6.0
-            - clang-tidy-6.0
+            - clang-5.0
+            - clang-tidy-5.0
           sources:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-4.0
@@ -247,6 +250,7 @@ matrix:
         - |
           cmake .. \
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+            -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=${ENABLE_CLANG_TIDY} \
             -DENABLE_CLANG_TIDY:BOOL=${ENABLE_CLANG_TIDY}
         - cmake --build . --config ${BUILD_TYPE}
       after_success:

@@ -21,5 +21,12 @@ This is the example of HTTP WEB server (written using C++ Poco library) which is
 
 ---
 
+- Git Check
 - [Codacy](https://app.codacy.com)
 - [CppCheck](http://cppcheck.sourceforge.net)
+- [Clang-Tidy](http://apt.llvm.org/)
+  ``` bash
+  sudo apt-rm-repository "deb http://apt.llvm.org/artful/ llvm-toolchain-artful-6.0 main"
+  wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+  sudo apt-get install clang-6.0 lldb-6.0 clang-tools-6.0
+  ```
