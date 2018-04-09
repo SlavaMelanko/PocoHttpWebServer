@@ -4,6 +4,8 @@
 BUILD_MODE=Release
 BUILD_ARCH=x64
 BUILD_DIR=../build/gcc-${BUILD_ARCH}-${BUILD_MODE}
+ENABLE_TESTING=TRUE
+ENABLE_CPPCHECK=TRUE
 
 # Color configuration.
 COLOR_OFF='\033[0m'
@@ -44,6 +46,8 @@ PrintInfoMsg "[CMake] Generating the project..."
 cmake \
     -G "Unix Makefiles" \
     -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+    -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
+    -DENABLE_CPPCHECK:BOOL=${ENABLE_CPPCHECK} \
     -Wno-dev \
     ../..
 CheckError "[CMake] Failed to generate the project."
@@ -55,4 +59,14 @@ make -j $CPU_COUNT &> build.log
 
 PrintInfoMsg "Project has been built successfully!"
 
-exit
+if [ "$ENABLE_TESTING" = TRUE ]; then
+    PrintInfoMsg "Running tests..."
+    ctest --extra-verbose --parallel $CPU_COUNT
+    CheckError "Failed to pass some test cases."
+fi
+
+if [ "${ENABLE_CPPCHECK}" = TRUE ]; then
+    PrintInfoMsg "Performing code analysis..."
+    make check
+fi
+
