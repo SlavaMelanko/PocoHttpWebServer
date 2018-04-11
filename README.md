@@ -9,6 +9,9 @@ This is the example of HTTP WEB server (written using C++ Poco library) which is
 [![Coverage Status](https://coveralls.io/repos/github/SMelanko/PocoHttpWebServer/badge.svg?branch=master)](https://coveralls.io/github/SMelanko/PocoHttpWebServer?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f922034805584ab0be793eb87b13e1ab)](https://www.codacy.com/app/SMelanko/PocoHttpWebServer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SMelanko/PocoHttpWebServer&amp;utm_campaign=Badge_Grade)
 
+
+[CppCon 2017: Rian Quinn “A Test a Day Keeps Your Manager Away!”](https://youtu.be/KdJhQuycD78)
+
 ---
 
 - [Travis CI](https://travis-ci.org)
