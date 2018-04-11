@@ -14,11 +14,17 @@ if (MSVC14 OR MSVC15)
         # Catch C++ exceptions only and tells the compiler to assume that
         # functions declared as extern "C" never throw a C++ exception.
         /EHsc
+        # The /MP option can reduce the total time to compile the source files on the command line.
+        # If you omit the processMax argument, the compiler retrieves the number of effective processors
+        # on your computer from the operating system, and creates a process for each processor.
+        /MP
         # Display level 1, level 2, and level 3 warnings, and all
         # level 4 (informational) warnings that are not turned off by default.
         /W3
         # Treat all compiler warnings as errors.
         #/WX
+        # Enable faster PDB generation in parallel builds by minimizing RPC calls to mspdbsrv.exe.
+        /Zf
     )
 
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
@@ -57,4 +63,3 @@ else ()
 #    https://stackoverflow.com/questions/13238511/xcode-clang-clang-warning-argument-unused-during-compilation-fcheck-new
 
 endif ()
-
