@@ -1,6 +1,6 @@
 # PocoHttpWebServer
 
-This is the example of HTTP WEB server (written using C++ Poco library) which is going to be run in the Docker Container.
+This is a test project to find and check tools/packages/services which improve the quality, readability of code and reliable of the future product at all.
 
 [![GitHub version](https://badge.fury.io/gh/SMelanko%2FPocoHttpWebServer.svg)](https://badge.fury.io/gh/SMelanko%2FPocoHttpWebServer)
 [![Build Status: Linux, OSX](https://travis-ci.org/SMelanko/PocoHttpWebServer.svg?branch=master)](https://travis-ci.org/SMelanko/PocoHttpWebServer)
