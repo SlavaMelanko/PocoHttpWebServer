@@ -38,6 +38,6 @@ else ()
 
 	add_custom_target(tidy
 		COMMAND ${RUN_CLANG_TIDY_BIN} ${RUN_CLANG_TIDY_BIN_ARGS}
-		COMMENT "Running clang-tidy"
+		COMMENT "Running clang-tidy..."
 	)
 endif ()
