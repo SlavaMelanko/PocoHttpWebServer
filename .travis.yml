@@ -15,7 +15,7 @@ matrix:
     #
     - os: osx
       env:
-        - BUILD_VER="Xcode 8.0 Release"
+        - JOB="Xcode 8.0 Release"
         - CXX_COMPILER=clang++
         - BUILD_TYPE=Release
       osx_image: xcode8.0
@@ -32,7 +32,7 @@ matrix:
     #
     - os: osx
       env:
-        - BUILD_VER="Xcode 9.0 Release"
+        - JOB="Xcode 9.0 Release"
         - CXX_COMPILER=clang++
         - BUILD_TYPE=Release
       osx_image: xcode9.0
@@ -45,11 +45,11 @@ matrix:
         - cmake --build . --config ${BUILD_TYPE}
 
     #
-    # Xcode 9.0 Debug with tests.
+    # Xcode 9.0 Debug + tests.
     #
     - os: osx
       env:
-        - BUILD_VER="Xcode 9.0 Debug with tests"
+        - JOB="Xcode 9.0 Debug + tests"
         - CXX_COMPILER=clang++
         - BUILD_TYPE=Debug
       osx_image: xcode9.0
@@ -72,7 +72,7 @@ matrix:
     #
     - os: linux
       env:
-        - BUILD_VER="Git Check"
+        - JOB="Git Check"
       script:
         - |
           if [[ -n $(git diff --check HEAD^) ]]; then
@@ -87,7 +87,7 @@ matrix:
     #
     - os: linux
       env:
-        - BUILD_VER="GCC 5 Release"
+        - JOB="GCC 5 Release"
         - CC_COMPILER=gcc-5
         - CXX_COMPILER=g++-5
         - BUILD_TYPE=Release
@@ -113,7 +113,7 @@ matrix:
     #
     - os: linux
       env:
-        - BUILD_VER="GCC 6 Release"
+        - JOB="GCC 6 Release"
         - CC_COMPILER=gcc-6
         - CXX_COMPILER=g++-6
         - BUILD_TYPE=Release
@@ -139,7 +139,7 @@ matrix:
     #
     - os: linux
       env:
-        - BUILD_VER="GCC 7 Release"
+        - JOB="GCC 7 Release"
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Release
@@ -161,11 +161,11 @@ matrix:
         - cmake --build . --config ${BUILD_TYPE}
 
     #
-    # GCC 7 Debug with Codecov and Coveralls.
+    # GCC 7 Debug + Codecov and Coveralls.
     #
     - os: linux
       env:
-        - BUILD_VER="GCC 7 Debug with Codecov and Coveralls"
+        - JOB="GCC 7 Debug + Codecov and Coveralls"
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
@@ -201,11 +201,11 @@ matrix:
             -E ".*CMakeFiles.*"
 
     #
-    # GCC 7 Debug with Cppcheck.
+    # GCC 7 Debug + Cppcheck.
     #
     - os: linux
       env:
-        - BUILD_VER="GCC 7 Debug with Cppcheck"
+        - JOB="GCC 7 Debug + Cppcheck"
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
@@ -227,11 +227,11 @@ matrix:
         - make check
 
     #
-    # GCC 7 Debug with Clang-Tidy.
+    # GCC 7 Debug + Clang-Tidy.
     #
     - os: linux
       env:
-        - BUILD_VER="GCC 7 Debug with Clang-Tidy"
+        - JOB="GCC 7 Debug + Clang-Tidy"
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
