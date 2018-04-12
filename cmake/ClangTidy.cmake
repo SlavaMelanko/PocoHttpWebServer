@@ -16,7 +16,7 @@ endif ()
 if (MSVC)
 	message(WARNING "There is no Windows support")
 else ()
-	CLANG_TIDY_VERSION="6.0"
+	set(CLANG_TIDY_VERSION "6.0")
 
 	find_program(CLANG_TIDY_BIN clang-tidy-${CLANG_TIDY_VERSION})
 
