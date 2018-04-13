@@ -6,3 +6,4 @@ Poco:shared=False
 
 [generators]
 cmake
+

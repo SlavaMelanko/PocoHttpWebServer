@@ -56,3 +56,4 @@ add_custom_target(
 	COMMAND ${CMAKE_BINARY_DIR}/bin/cppcheck ${CPPCHECK_ARGS}
 	COMMENT "Running cppcheck..."
 )
+

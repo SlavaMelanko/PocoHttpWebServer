@@ -51,7 +51,7 @@ matrix:
     #
     - os: linux
       env:
-        - TEST="Git Check"
+        - JOB="Git Check"
       script:
         - |
           if [[ -n $(git diff --check HEAD^) ]]; then
@@ -66,6 +66,7 @@ matrix:
     #
     - os: linux
       env:
+        - JOB="GCC 5 Release"
         - CC_COMPILER=gcc-5
         - CXX_COMPILER=g++-5
         - BUILD_TYPE=Release
@@ -91,6 +92,7 @@ matrix:
     #
     - os: linux
       env:
+        - JOB="GCC 6 Release"
         - CC_COMPILER=gcc-6
         - CXX_COMPILER=g++-6
         - BUILD_TYPE=Release
@@ -116,6 +118,7 @@ matrix:
     #
     - os: linux
       env:
+        - JOB="GCC 7 Release"
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Release
@@ -137,10 +140,11 @@ matrix:
         - cmake --build . --config ${BUILD_TYPE} -- -j2
 
     #
-    # GCC 7 Debug with Codecov and Coveralls.
+    # GCC 7 Debug + Codecov and Coveralls.
     #
     - os: linux
       env:
+        - JOB="GCC 7 Debug + Codecov and Coveralls"
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
@@ -176,10 +180,11 @@ matrix:
             -E ".*CMakeFiles.*"
 
     #
-    # GCC 7 Debug with Cppcheck.
+    # GCC 7 Debug + Cppcheck.
     #
     - os: linux
       env:
+        - JOB="GCC 7 Debug + Cppcheck"
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug

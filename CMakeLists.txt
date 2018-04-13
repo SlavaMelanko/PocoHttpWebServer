@@ -43,3 +43,4 @@ endif ()
 if (ENABLE_CLANG_TIDY)
 	include(ClangTidy)
 endif ()
+
