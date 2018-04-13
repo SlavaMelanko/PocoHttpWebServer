@@ -19,3 +19,4 @@ comment:
 coverage:
   ignore:
     - "modules/http-server"
+

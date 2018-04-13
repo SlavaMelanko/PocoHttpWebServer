@@ -39,3 +39,8 @@ endif ()
 if (ENABLE_CPPCHECK)
 	include(Cppcheck)
 endif ()
+
+if (ENABLE_CLANG_TIDY)
+	include(ClangTidy)
+endif ()
+

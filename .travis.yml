@@ -24,7 +24,7 @@ matrix:
         - mkdir -p build && cd build
         - conan install .. --build missing -s build_type=${BUILD_TYPE}
         - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE}
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
 
     #
     # Xcode 9.0 Release.
@@ -40,7 +40,7 @@ matrix:
         - mkdir -p build && cd build
         - conan install .. --build missing -s build_type=${BUILD_TYPE}
         - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE}
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
 
     ###########################################################################
     # GCC on Linux.
@@ -51,7 +51,7 @@ matrix:
     #
     - os: linux
       env:
-        - TEST="Git Check"
+        - JOB="Git Check"
       script:
         - |
           if [[ -n $(git diff --check HEAD^) ]]; then
@@ -66,6 +66,7 @@ matrix:
     #
     - os: linux
       env:
+        - JOB="GCC 5 Release"
         - CC_COMPILER=gcc-5
         - CXX_COMPILER=g++-5
         - BUILD_TYPE=Release
@@ -84,13 +85,14 @@ matrix:
             -s build_type=${BUILD_TYPE} \
             -s compiler.libcxx=libstdc++11
         - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE}
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
 
     #
     # GCC 6 Release.
     #
     - os: linux
       env:
+        - JOB="GCC 6 Release"
         - CC_COMPILER=gcc-6
         - CXX_COMPILER=g++-6
         - BUILD_TYPE=Release
@@ -109,13 +111,14 @@ matrix:
             -s build_type=${BUILD_TYPE} \
             -s compiler.libcxx=libstdc++11
         - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE}
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
 
     #
     # GCC 7 Release.
     #
     - os: linux
       env:
+        - JOB="GCC 7 Release"
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Release
@@ -134,13 +137,14 @@ matrix:
             -s build_type=${BUILD_TYPE} \
             -s compiler.libcxx=libstdc++11
         - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE}
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
 
     #
-    # GCC 7 Debug with Codecov and Coveralls.
+    # GCC 7 Debug + Codecov and Coveralls.
     #
     - os: linux
       env:
+        - JOB="GCC 7 Debug + Codecov and Coveralls"
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
@@ -161,7 +165,7 @@ matrix:
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
             -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
             -DENABLE_COVERAGE:BOOL=${ENABLE_COVERAGE}
-        - cmake --build . --config ${BUILD_TYPE}
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
       after_success:
         - ctest --extra-verbose --parallel 2
         - |
@@ -176,10 +180,11 @@ matrix:
             -E ".*CMakeFiles.*"
 
     #
-    # GCC 7 Debug with Cppcheck.
+    # GCC 7 Debug + Cppcheck.
     #
     - os: linux
       env:
+        - JOB="GCC 7 Debug + Cppcheck"
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
@@ -196,9 +201,45 @@ matrix:
           cmake .. \
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
             -DENABLE_CPPCHECK:BOOL=${ENABLE_CPPCHECK}
-        - cmake --build . --config ${BUILD_TYPE}
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
       after_success:
         - make check
+
+    #
+    # GCC 7 Debug + Clang-Tidy-6.0.
+    #
+    - os: linux
+      env:
+        - JOB="GCC 7 Debug + Clang-Tidy-6.0"
+        - CC_COMPILER=gcc-7
+        - CXX_COMPILER=g++-7
+        - BUILD_TYPE=Debug
+        - ENABLE_CLANG_TIDY=TRUE
+      addons:
+        apt:
+          packages:
+            - gcc-7
+            - g++-7
+            - clang-6.0
+            - clang-tidy-6.0
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-6.0
+      script:
+        - cd "${TRAVIS_BUILD_DIR}"
+        - mkdir -p build && cd build
+        - |
+          conan install .. --build missing \
+            -s build_type=${BUILD_TYPE} \
+            -s compiler.libcxx=libstdc++11
+        - |
+          cmake .. \
+            -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+            -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=${ENABLE_CLANG_TIDY} \
+            -DENABLE_CLANG_TIDY:BOOL=${ENABLE_CLANG_TIDY}
+        - cmake --build . --config ${BUILD_TYPE}
+      after_success:
+        - make tidy
 
   exclude:
     - os: osx
