@@ -24,7 +24,7 @@ matrix:
         - mkdir -p build && cd build
         - conan install .. --build missing -s build_type=${BUILD_TYPE}
         - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE} -- -jobs 2
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
 
     #
     # Xcode 9.0 Release.
@@ -40,7 +40,7 @@ matrix:
         - mkdir -p build && cd build
         - conan install .. --build missing -s build_type=${BUILD_TYPE}
         - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE} -- -jobs 2
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
 
     ###########################################################################
     # GCC on Linux.
@@ -199,6 +199,42 @@ matrix:
         - cmake --build . --config ${BUILD_TYPE} -- -j2
       after_success:
         - make check
+
+    #
+    # GCC 7 Debug + Clang-Tidy-6.0.
+    #
+    - os: linux
+      env:
+        - JOB="GCC 7 Debug + Clang-Tidy-6.0"
+        - CC_COMPILER=gcc-7
+        - CXX_COMPILER=g++-7
+        - BUILD_TYPE=Debug
+        - ENABLE_CLANG_TIDY=TRUE
+      addons:
+        apt:
+          packages:
+            - gcc-7
+            - g++-7
+            - clang-6.0
+            - clang-tidy-6.0
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-6.0
+      script:
+        - cd "${TRAVIS_BUILD_DIR}"
+        - mkdir -p build && cd build
+        - |
+          conan install .. --build missing \
+            -s build_type=${BUILD_TYPE} \
+            -s compiler.libcxx=libstdc++11
+        - |
+          cmake .. \
+            -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+            -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=${ENABLE_CLANG_TIDY} \
+            -DENABLE_CLANG_TIDY:BOOL=${ENABLE_CLANG_TIDY}
+        - cmake --build . --config ${BUILD_TYPE}
+      after_success:
+        - make tidy
 
   exclude:
     - os: osx
