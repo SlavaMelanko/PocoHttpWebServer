@@ -46,20 +46,20 @@ matrix:
     # GCC on Linux.
     #
 
-    #
-    # Git Check
-    #
-    - os: linux
-      env:
-        - JOB="Git Check"
-      script:
-        - |
-          if [[ -n $(git diff --check HEAD^) ]]; then
-            echo "You must remove whitespaces before submitting a pull request"
-            echo ""
-            git diff --check HEAD^
-            exit -1
-          fi
+#    #
+#    # Git Check
+#    #
+#    - os: linux
+#      env:
+#        - JOB="Git Check"
+#      script:
+#        - |
+#          if [[ -n $(git diff --check HEAD^) ]]; then
+#            echo "You must remove whitespaces before submitting a pull request"
+#            echo ""
+#            git diff --check HEAD^
+#            exit -1
+#          fi
 
     #
     # GCC 5 Release.

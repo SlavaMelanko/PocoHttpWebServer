@@ -20,13 +20,13 @@ else ()
 
 	find_program(CLANG_TIDY_BIN clang-tidy-${CLANG_TIDY_VERSION})
 
-	if (CLANG_TIDY_BIN STREQUAL "CLANG_TIDY_BIN-NOTFOUND")
+	if (NOT CLANG_TIDY_BIN)
 		message(FATAL_ERROR "Unable to locate clang-tidy-${CLANG_TIDY_VERSION}")
 	endif ()
 
 	find_program(RUN_CLANG_TIDY_BIN run-clang-tidy-${CLANG_TIDY_VERSION}.py)
 
-	if (RUN_CLANG_TIDY_BIN STREQUAL "RUN_CLANG_TIDY_BIN-NOTFOUND")
+	if (NOT RUN_CLANG_TIDY_BIN)
 		message(FATAL_ERROR "Unable to locate run-clang-tidy-${CLANG_TIDY_VERSION}.py")
 	endif ()
 
