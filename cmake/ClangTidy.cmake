@@ -32,8 +32,8 @@ else ()
 
 	list(APPEND RUN_CLANG_TIDY_BIN_ARGS
 		-clang-tidy-binary ${CLANG_TIDY_BIN}
-		-header-filter="../modules"
-		-checks=-*
+		-header-filter=${PROJECT_SOURCE_DIR}/modules
+		-checks=cert*,misc*,perf*,cppc*,read*,mode*,-cert-err58-cpp,-misc-noexcept-move-constructor
 	)
 
 	add_custom_target(tidy
