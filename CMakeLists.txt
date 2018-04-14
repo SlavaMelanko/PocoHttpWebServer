@@ -25,22 +25,25 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 if (ENABLE_COVERAGE)
-	include(Coverage)
+    include(Coverage)
 endif ()
 
 add_subdirectory(modules/http-server)
 add_subdirectory(modules/utils)
 
 if (ENABLE_TESTING)
-	enable_testing()
-	add_subdirectory(tests)
+    enable_testing()
+    add_subdirectory(tests)
 endif ()
 
 if (ENABLE_CPPCHECK)
-	include(Cppcheck)
+    include(Cppcheck)
 endif ()
 
 if (ENABLE_CLANG_TIDY)
-	include(ClangTidy)
+    include(ClangTidy)
 endif ()
 
+if (ENABLE_VALGRIND)
+    include(Valgrind)
+endif ()
