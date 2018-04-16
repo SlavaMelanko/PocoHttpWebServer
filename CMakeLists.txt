@@ -31,6 +31,10 @@ endif ()
 add_subdirectory(modules/http-server)
 add_subdirectory(modules/utils)
 
+if (ENABLE_VALGRIND)
+    include(Valgrind)
+endif ()
+
 if (ENABLE_TESTING)
     enable_testing()
     add_subdirectory(tests)
@@ -42,8 +46,4 @@ endif ()
 
 if (ENABLE_CLANG_TIDY)
     include(ClangTidy)
-endif ()
-
-if (ENABLE_VALGRIND)
-    include(Valgrind)
 endif ()
