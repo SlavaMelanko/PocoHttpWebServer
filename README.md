@@ -33,3 +33,4 @@ This is a test project to find and check tools/packages/services which improve t
   wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
   sudo apt-get install clang-6.0 lldb-6.0 clang-tools-6.0
   ```
+- [Valgrind](http://valgrind.org)

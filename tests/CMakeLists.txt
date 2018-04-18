@@ -1,8 +1,6 @@
 
 project(tests CXX)
 
-include(CTest)
-
 list(APPEND CATCH_CMAKE_ARGS
 	"-DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/external"
 	"-DNO_SELFTEST=true"
@@ -16,7 +14,7 @@ externalproject_add(
 	# URL of git repo.
 	GIT_REPOSITORY https://github.com/catchorg/Catch2.git
 	# Git branch name, commit id or tag.
-	GIT_TAG v2.1.2
+	GIT_TAG v2.2.2
 	# Force Git to output progress information during the clone step.
 	GIT_PROGRESS 1
 	# Arguments to CMake command line.
