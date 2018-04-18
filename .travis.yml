@@ -250,6 +250,7 @@ matrix:
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
+        - ENABLE_TESTING=TRUE
         - ENABLE_VALGRIND=TRUE
       addons:
         apt:
@@ -269,6 +270,7 @@ matrix:
         - |
           cmake .. \
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+            -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
             -DENABLE_VALGRIND:BOOL=${ENABLE_VALGRIND}
         - cmake --build . --config ${BUILD_TYPE} -- -j2
       after_success:

@@ -16,7 +16,7 @@ if (WIN32)
     message(WARNING "Please note, there is no Windows support for Valgrind")
 else ()
     # Give details for each definitely lost or possibly lost block, including where it was allocated.
-    set(MEMORYCHECK_COMMAND_OPTIONS "${MEMORYCHECK_COMMAND_OPTIONS} --leak-check=full")
+    set(MEMORYCHECK_COMMAND_OPTIONS "--leak-check=full")
     # Print out a list of open file descriptors on exit or on request, via the gdbserver monitor
     # command v.info open_fds. Along with each file descriptor is printed a stack backtrace of
     # where the file was opened and any details relating to the file descriptor.
@@ -26,4 +26,8 @@ else ()
     set(MEMORYCHECK_COMMAND_OPTIONS "${MEMORYCHECK_COMMAND_OPTIONS} --trace-children=yes")
     # Specifies an alternative exit code to return if Valgrind reported any errors in the run.
     set(MEMORYCHECK_COMMAND_OPTIONS "${MEMORYCHECK_COMMAND_OPTIONS} --error-exitcode=1")
+
+    message(STATUS "Command-line options to the \"${MEMORYCHECK_COMMAND}\" tool is "
+        "\"${MEMORYCHECK_COMMAND_OPTIONS}\"")
 endif ()
+
