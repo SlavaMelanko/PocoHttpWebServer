@@ -285,6 +285,7 @@ matrix:
         - CC_COMPILER=gcc-7
         - CXX_COMPILER=g++-7
         - BUILD_TYPE=Debug
+        - ENABLE_TESTING=TRUE
         - ENABLE_ASAN=TRUE
       addons: *gcc7
       script:
@@ -297,6 +298,7 @@ matrix:
         - |
           cmake .. \
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+            -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
             -DENABLE_ASAN:BOOL=${ENABLE_ASAN}
         - cmake --build . --config ${BUILD_TYPE} -- -j2
       after_success:
