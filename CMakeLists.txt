@@ -49,3 +49,6 @@ if (ENABLE_VALGRIND)
     include(Valgrind)
 endif ()
 
+if (ENABLE_ASAN)
+    include(GoogleSanitizers)
+endif ()
