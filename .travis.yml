@@ -304,6 +304,34 @@ matrix:
       after_success:
         - ctest --extra-verbose --parallel 2
 
+    #
+    # GCC 7 Debug + Google Memory Sanitizer.
+    #
+    - os: linux
+      env:
+        - JOB="GCC 7 Debug + Google Memory Sanitizer"
+        - CC_COMPILER=gcc-7
+        - CXX_COMPILER=g++-7
+        - BUILD_TYPE=Debug
+        - ENABLE_TESTING=TRUE
+        - ENABLE_MSAN=TRUE
+      addons: *gcc7
+      script:
+        - cd "${TRAVIS_BUILD_DIR}"
+        - mkdir -p build && cd build
+        - |
+          conan install .. --build missing \
+            -s build_type=${BUILD_TYPE} \
+            -s compiler.libcxx=libstdc++11
+        - |
+          cmake .. \
+            -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
+            -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
+            -DENABLE_MSAN:BOOL=${ENABLE_MSAN}
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
+      after_success:
+        - ctest --extra-verbose --parallel 2
+
   exclude:
     - os: osx
       compiler: gcc

@@ -52,3 +52,7 @@ endif ()
 if (ENABLE_ASAN)
     include(GoogleSanitizers)
 endif ()
+
+if (ENABLE_MSAN)
+    include(GoogleSanitizers)
+endif ()

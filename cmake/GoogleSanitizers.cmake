@@ -11,20 +11,21 @@
 # which makes them very fast (e.g. ASan incurs just 2x slowdown).
 #
 
-if (NOT DEFINED ENABLE_ASAN)
-    message(WARNING "Please set ENABLE_ASAN variable as true in order to use Google Sanitizers")
+if (WIN32)
+    message(WARNING "Please note, there is no Windows support for Google Sanitizers")
     return()
 endif ()
 
-if (WIN32)
-    message(WARNING "Please note, there is no Windows support for Google Sanitizers")
-else ()
+if (ENABLE_ASAN)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O1")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=gold")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=leak")
+endif ()
 
-    message(STATUS "${CMAKE_CXX_FLAGS}")
+if (ENABLE_MSAN)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fuse-ld=gold")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
 endif ()
