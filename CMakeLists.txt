@@ -17,7 +17,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 # Load and run CMake code from the file given.
 include(cotire)
-include(CxxCompilerOptions)
+#include(CxxCompilerOptions)
 include(ExternalProject)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)

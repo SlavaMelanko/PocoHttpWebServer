@@ -365,25 +365,25 @@ matrix:
     #
 
     #
-    # Clang 4 Debug + Google Address Sanitizer.
+    # Clang 5 Debug + Google Address Sanitizer.
     #
     - os: linux
       env:
-        - JOB="Clang 4 Debug + Google Address Sanitizer"
-        - CC_COMPILER=clang-4.0
-        - CXX_COMPILER=clang++-4.0
+        - JOB="Clang 5 Debug + Google Address Sanitizer"
+        - CC_COMPILER=clang-5.0
+        - CXX_COMPILER=clang++-5.0
         - BUILD_TYPE=Debug
         - ENABLE_TESTING=TRUE
         - ENABLE_ASAN=TRUE
       addons: &clang4
         apt:
           packages:
-            - clang-4.0
+            - clang-5.0
             - gcc-6
             - g++-6
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-4.0
+            - llvm-toolchain-trusty-5.0
       script:
         - cd "${TRAVIS_BUILD_DIR}"
         - mkdir -p build && cd build
