@@ -276,100 +276,15 @@ matrix:
       after_success:
         - ctest --extra-verbose --parallel 2 -T memcheck
 
-    #
-    # GCC 7 Debug + Google Address Sanitizer.
-    #
-    - os: linux
-      env:
-        - JOB="GCC 7 Debug + Google Address Sanitizer"
-        - CC_COMPILER=gcc-7
-        - CXX_COMPILER=g++-7
-        - BUILD_TYPE=Debug
-        - ENABLE_TESTING=TRUE
-        - ENABLE_ASAN=TRUE
-      addons: *gcc7
-      script:
-        - cd "${TRAVIS_BUILD_DIR}"
-        - mkdir -p build && cd build
-        - |
-          conan install .. --build missing \
-            -s build_type=${BUILD_TYPE} \
-            -s compiler.libcxx=libstdc++11
-        - |
-          cmake .. \
-            -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
-            -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
-            -DENABLE_ASAN:BOOL=${ENABLE_ASAN}
-        - cmake --build . --config ${BUILD_TYPE} -- -j2
-      after_success:
-        - ctest --extra-verbose --parallel 2
-
-    #
-    # GCC 7 Debug + Google Memory Sanitizer.
-    #
-    - os: linux
-      env:
-        - JOB="GCC 7 Debug + Google Memory Sanitizer"
-        - CC_COMPILER=gcc-7
-        - CXX_COMPILER=g++-7
-        - BUILD_TYPE=Debug
-        - ENABLE_TESTING=TRUE
-        - ENABLE_MSAN=TRUE
-      addons: *gcc7
-      script:
-        - cd "${TRAVIS_BUILD_DIR}"
-        - mkdir -p build && cd build
-        - |
-          conan install .. --build missing \
-            -s build_type=${BUILD_TYPE} \
-            -s compiler.libcxx=libstdc++11
-        - |
-          cmake .. \
-            -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
-            -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
-            -DENABLE_MSAN:BOOL=${ENABLE_MSAN}
-        - cmake --build . --config ${BUILD_TYPE} -- -j2
-      after_success:
-        - ctest --extra-verbose --parallel 2
-
-    #
-    # GCC 7 Debug + Google Thread Sanitizer.
-    #
-    - os: linux
-      env:
-        - JOB="GCC 7 Debug + Google Thread Sanitizer"
-        - CC_COMPILER=gcc-7
-        - CXX_COMPILER=g++-7
-        - BUILD_TYPE=Debug
-        - ENABLE_TESTING=TRUE
-        - ENABLE_TSAN=TRUE
-      addons: *gcc7
-      script:
-        - cd "${TRAVIS_BUILD_DIR}"
-        - mkdir -p build && cd build
-        - |
-          conan install .. --build missing \
-            -s build_type=${BUILD_TYPE} \
-            -s compiler.libcxx=libstdc++11
-        - |
-          cmake .. \
-            -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
-            -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
-            -DENABLE_TSAN:BOOL=${ENABLE_TSAN}
-        - cmake --build . --config ${BUILD_TYPE} -- -j2
-      after_success:
-        - ctest --extra-verbose --parallel 2
-
     ###########################################################################
     # Clang on Linux.
     #
 
     #
-    # Clang 5 Debug + Google Address Sanitizer.
+    # Clang 5 Debug.
     #
     - os: linux
       env:
-        - JOB="Clang 5 Debug + Google Address Sanitizer"
         - CC_COMPILER=clang-5.0
         - CXX_COMPILER=clang++-5.0
         - BUILD_TYPE=Debug
@@ -379,8 +294,6 @@ matrix:
         apt:
           packages:
             - clang-5.0
-            - gcc-6
-            - g++-6
           sources:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-5.0
@@ -391,14 +304,8 @@ matrix:
           conan install .. --build missing \
             -s build_type=${BUILD_TYPE} \
             -s compiler.libcxx=libstdc++11
-        - |
-          cmake .. \
-            -DCMAKE_BUILD_TYPE:STRING=${BUILD_MODE} \
-            -DENABLE_TESTING:BOOL=${ENABLE_TESTING} \
-            -DENABLE_ASAN:BOOL=${ENABLE_ASAN}
+        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
         - cmake --build . --config ${BUILD_TYPE} -- -j2
-      after_success:
-        - ctest --extra-verbose --parallel 2
 
   exclude:
     - os: osx
