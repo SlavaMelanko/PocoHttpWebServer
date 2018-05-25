@@ -1,5 +1,5 @@
 # Use an official and the latest GCC image.
-FROM gcc
+FROM gcc:latest
 
 # Set the author field of the generated image.
 LABEL maintainer="Slava Melanko"
@@ -12,12 +12,11 @@ RUN ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake
 RUN rm /cmake-3.10.0-Linux-x86_64.sh
 RUN cmake --version
 
-# Update system to the newest versions of packages and their dependencies.
-RUN apt-get update
-# Install additional packages.
-RUN apt-get install -y \
-    mc \
-    python-dev
+# Update system to the newest versions of packages and their dependencies
+# and install additional packages.
+RUN apt-get update && apt-get install -y --no-install-recommends mc python-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Python package manager.
 ADD https://bootstrap.pypa.io/get-pip.py /get-pip.py
@@ -38,13 +37,12 @@ WORKDIR /projects
 # Copy the github repo into the container at $WORKDIR directory.
 RUN git clone https://github.com/SMelanko/PocoHttpWebServer.git
 # Build the project.
-WORKDIR PocoHttpWebServer/build
+WORKDIR /projects/PocoHttpWebServer/build
 RUN conan install .. --build missing -s build_type=Release -s compiler.libcxx=libstdc++11
 RUN cmake .. -DCMAKE_BUILD_TYPE:STRING=Release
 RUN cmake --build . --config Release
 
 # Run HTTP WEB server.
-WORKDIR bin
+WORKDIR /projects/PocoHttpWebServer/build/bin
 
 CMD ["./server"]
-
