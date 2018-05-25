@@ -1,5 +1,5 @@
 # Use an official and the latest GCC image.
-FROM gcc:latest
+FROM gcc:7
 
 # Set the author field of the generated image.
 LABEL maintainer="Slava Melanko"
