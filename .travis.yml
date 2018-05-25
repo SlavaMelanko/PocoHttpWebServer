@@ -7,7 +7,7 @@ matrix:
   include:
 
     ###########################################################################
-    # Clang on macOS.
+    # Xcode on macOS.
     #
 
     #
@@ -276,11 +276,40 @@ matrix:
       after_success:
         - ctest --extra-verbose --parallel 2 -T memcheck
 
+    ###########################################################################
+    # Clang on Linux.
+    #
+
+    #
+    # Clang 5 Debug.
+    #
+    - os: linux
+      env:
+        - CC_COMPILER=clang-5.0
+        - CXX_COMPILER=clang++-5.0
+        - BUILD_TYPE=Debug
+        - ENABLE_TESTING=TRUE
+        - ENABLE_ASAN=TRUE
+      addons: &clang4
+        apt:
+          packages:
+            - clang-5.0
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-5.0
+      script:
+        - cd "${TRAVIS_BUILD_DIR}"
+        - mkdir -p build && cd build
+        - |
+          conan install .. --build missing \
+            -s build_type=${BUILD_TYPE} \
+            -s compiler.libcxx=libstdc++11
+        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
+        - cmake --build . --config ${BUILD_TYPE} -- -j2
+
   exclude:
     - os: osx
       compiler: gcc
-    - os: linux
-      compiler: clang
 
 install:
   # Set up the environment.

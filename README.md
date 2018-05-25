@@ -14,6 +14,23 @@ This is a test project to find and check tools/packages/services which improve t
 
 ---
 
+- C++11/14
+- [CMake](https://cmake.org/)
+- [Conan](https://www.conan.io/)
+- [Git](https://git-scm.com/) + [SmartGit](https://www.syntevo.com/smartgit/)
+
+---
+
+IDE:
+
+- Visual Studio Community 2017
+- CLion
+- Xcode
+
+---
+
+Continuous Integration and Deployment service:
+
 - [Travis CI](https://travis-ci.org)
 - [AppVeyor](https://www.appveyor.com)
 
@@ -23,6 +40,8 @@ This is a test project to find and check tools/packages/services which improve t
 - [Coveralls](https://coveralls.io)
 
 ---
+
+Analysis tool for C/C++ code:
 
 - Git Check
 - [Codacy](https://app.codacy.com)
@@ -34,3 +53,12 @@ This is a test project to find and check tools/packages/services which improve t
   sudo apt-get install clang-6.0 lldb-6.0 clang-tools-6.0
   ```
 - [Valgrind](http://valgrind.org)
+- [Google Sanitizers](https://github.com/google/sanitizers)
+  * AddressSanitizer
+  * MemorySanitizer
+  * ThreadSanitizer
+
+---
+
+- [Docker](https://www.docker.com/)
+
