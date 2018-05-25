@@ -47,11 +47,11 @@ Analysis tool for C/C++ code:
 - [Codacy](https://app.codacy.com)
 - [CppCheck](http://cppcheck.sourceforge.net)
 - [Clang-Tidy](http://apt.llvm.org/)
-  ``` bash
-  sudo apt-rm-repository "deb http://apt.llvm.org/artful/ llvm-toolchain-artful-6.0 main"
-  wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
-  sudo apt-get install clang-6.0 lldb-6.0 clang-tools-6.0
-  ```
+``` bash
+sudo apt-rm-repository "deb http://apt.llvm.org/artful/ llvm-toolchain-artful-6.0 main"
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+sudo apt-get install clang-6.0 lldb-6.0 clang-tools-6.0
+```
 - [Valgrind](http://valgrind.org)
 - [Google Sanitizers](https://github.com/google/sanitizers)
   * AddressSanitizer
@@ -60,5 +60,4 @@ Analysis tool for C/C++ code:
 
 ---
 
-- [Docker](https://www.docker.com/)
-
+- [Docker](https://www.docker.com/) is a tool designed to make it easier to create, deploy, and run applications by using containers.

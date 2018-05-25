@@ -1,0 +1,1 @@
+![Docker Pulls](https://img.shields.io/docker/pulls/smela/gcc-dev.svg) ![Docker Automated build](https://img.shields.io/docker/automated/smela/gcc-dev.svg) ![Docker Build Status](https://img.shields.io/docker/build/smela/gcc-dev.svg)

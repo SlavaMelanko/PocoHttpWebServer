@@ -1,9 +1,13 @@
 [requires]
+fmt/5.0.0@bincrafters/stable
 Poco/1.8.0@pocoproject/stable
 
 [options]
+fmt:shared=False
+fmt:header_only=False
+fmt:fPIC=True
+fmt:with_cpp14=False
 Poco:shared=False
 
 [generators]
 cmake
-
