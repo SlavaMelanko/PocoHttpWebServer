@@ -15,7 +15,7 @@ This is a test project to find and check tools/packages/services which improve t
 ---
 
 - C++11/14
-- [CMake](https://cmake.org/)
+- [CMake](https://cmake.org/) + [cotire](https://github.com/sakra/cotire) + [cmakelint](https://github.com/richq/cmake-lint)
 - [Conan](https://www.conan.io/)
 - [Git](https://git-scm.com/) + [SmartGit](https://www.syntevo.com/smartgit/)
 
