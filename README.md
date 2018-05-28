@@ -15,7 +15,13 @@ This is a test project to find and check tools/packages/services which improve t
 
 [CppCon 2017: Rian Quinn “A Test a Day Keeps Your Manager Away!”](https://youtu.be/KdJhQuycD78)
 
-### Major Technologies
+### Main Concepts:
+- The Evils of Duplication - do not repeat yourself (DRY)
+- Orthogonality - make modules less cohesion
+- Reversibility
+- Respect all people who are or will be involved into project
+
+### Major Technologies:
 
 - [C++14](https://isocpp.org/wiki/faq/cpp14)
 - [CMake](https://cmake.org/) + [cotire](https://github.com/sakra/cotire) + [cmakelint](https://github.com/richq/cmake-lint)
