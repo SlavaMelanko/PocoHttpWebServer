@@ -15,37 +15,38 @@ This is a test project to find and check tools/packages/services which improve t
 
 [CppCon 2017: Rian Quinn “A Test a Day Keeps Your Manager Away!”](https://youtu.be/KdJhQuycD78)
 
-### Main Concepts:
+### Main Concepts
+
 - The Evils of Duplication - do not repeat yourself (DRY)
 - Orthogonality - make modules less cohesion
 - Reversibility
 - Respect all people who are or will be involved into project
 
-### Major Technologies:
+### Major Technologies
 
 - [C++14](https://isocpp.org/wiki/faq/cpp14)
 - [CMake](https://cmake.org/) + [cotire](https://github.com/sakra/cotire) + [cmakelint](https://github.com/richq/cmake-lint)
 - [Conan](https://www.conan.io/)
 - [Git](https://git-scm.com/) + [SmartGit](https://www.syntevo.com/smartgit/)
 
-### Integrated Development Environments (IDE):
+### Integrated Development Environments (IDE)
 
 - Visual Studio Community 2017
 - CLion
 - Xcode
 - Qt Creator
 
-### Continuous Integration Services:
+### Continuous Integration Services
 
 - [Travis CI](https://travis-ci.org) is a hosted, distributed continuous integration service used to build and test software projects hosted at GitHub.
 - [AppVeyor](https://www.appveyor.com) is a hosted, distributed continuous integration service used to build and test projects hosted on GitHub on a Microsoft Windows virtual machine.
 
-### Code Coverage Tools:
+### Code Coverage Tools
 
 - [Code Coverage](https://codecov.io) is a measurement used to express which lines of code were executed by a test suite.
 - [Coveralls](https://coveralls.io) is a web service to help you track your code coverage over time, and ensure that all your new code is fully covered.
 
-### C++ Analysis Tools:
+### C++ Analysis Tools
 
 - [Codacy](https://app.codacy.com) is an automated code review platform.
 - [Coverity](https://scan.coverity.com/dashboard) is a brand of software development products from Synopsys, consisting primarily of static code analysis and dynamic code analysis tools.
@@ -63,6 +64,14 @@ sudo apt-get install clang-6.0 lldb-6.0 clang-tools-6.0
   * MemorySanitizer
   * ThreadSanitizer
 
-### Continuous Delivery Tools:
+### Continuous Delivery Tools
 
 - [Docker](https://www.docker.com/) is a tool designed to make it easier to create, deploy, and run applications by using containers.
+
+### Specification
+
+- OpenAPI + Swagger (tools for implementing the specification)
+
+### Others
+
+- [draw.io](https://www.draw.io/) is a diagramming tool which helps to create flowcharts, process diagrams, org charts, UML, ER diagrams, network diagrams and much more.
