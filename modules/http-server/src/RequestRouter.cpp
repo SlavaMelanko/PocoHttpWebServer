@@ -1,3 +1,4 @@
+#include "HeartbeatRequestHandler.h"
 #include "RequestRouter.h"
 #include "TimeRequestHandler.h"
 
@@ -8,6 +9,8 @@ Poco::Net::HTTPRequestHandler* RequestRouter::createRequestHandler(
 {
 	if (request.getURI() == "/") {
 		return new TimeRequestHandler{};
+	} else if (request.getURI() == "/heartbeat") {
+		return new HeartbeatRequestHandler{};
 	} else {
 		return nullptr;
 	}
