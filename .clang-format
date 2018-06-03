@@ -1,5 +1,4 @@
-﻿---
-BasedOnStyle: WebKit
+﻿BasedOnStyle: WebKit
 AlignOperands: 'false'
 AlignTrailingComments: 'false'
 AllowShortCaseLabelsOnASingleLine: 'false'
@@ -31,5 +30,3 @@ SpacesInSquareBrackets: 'true'
 Standard: Cpp11
 TabWidth: '4'
 UseTab: Never
-
-...

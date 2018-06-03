@@ -50,6 +50,9 @@ This is a test project to find and check tools/packages/services which improve t
 ### C++ Code Formatter
 
 - [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html) is a tool to automatically format C++ code.
+``` bash
+find modules -name '*.h' -or -name '*.cpp' | xargs -I {} sh -c 'echo {}; clang-format -style=file -i {};'
+```
 
 ### C++ Analysis Tools
 

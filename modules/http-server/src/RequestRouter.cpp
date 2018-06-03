@@ -1,5 +1,5 @@
-#include "HeartbeatRequestHandler.h"
 #include "RequestRouter.h"
+#include "HeartbeatRequestHandler.h"
 #include "TimeRequestHandler.h"
 
 #include <Poco/Net/HTTPServerRequest.h>
