@@ -1,0 +1,35 @@
+﻿---
+BasedOnStyle: WebKit
+AlignOperands: 'false'
+AlignTrailingComments: 'false'
+AllowShortCaseLabelsOnASingleLine: 'false'
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: 'false'
+AllowShortLoopsOnASingleLine: 'false'
+AlwaysBreakAfterDefinitionReturnType: All
+AlwaysBreakAfterReturnType: All
+AlwaysBreakBeforeMultilineStrings: 'true'
+BreakBeforeBraces: WebKit
+BreakConstructorInitializersBeforeComma: 'true'
+BreakStringLiterals: 'false'
+ColumnLimit: '100'
+Cpp11BracedListStyle: 'false'
+DisableFormat: 'true'
+IndentWidth: '4'
+Language: Cpp
+MaxEmptyLinesToKeep: '1'
+NamespaceIndentation: None
+PointerAlignment: Left
+SortIncludes: 'true'
+SpaceBeforeAssignmentOperators: 'true'
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: 'false'
+SpacesInAngles: 'false'
+SpacesInContainerLiterals: 'false'
+SpacesInParentheses: 'false'
+SpacesInSquareBrackets: 'true'
+Standard: Cpp11
+TabWidth: '4'
+UseTab: Never
+
+...

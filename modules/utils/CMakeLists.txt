@@ -14,7 +14,7 @@ add_library(${PROJECT_NAME}
 
 add_library(smela::utils ALIAS ${PROJECT_NAME})
 
-target_include_directories( ${PROJECT_NAME}
+target_include_directories(${PROJECT_NAME}
     PUBLIC
         ${CMAKE_CURRENT_BINARY_DIR}
         ${PROJECT_SOURCE_DIR}/include

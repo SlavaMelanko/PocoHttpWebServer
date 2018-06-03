@@ -47,6 +47,10 @@ This is a test project to find and check tools/packages/services which improve t
 - [Code Coverage](https://codecov.io) is a measurement used to express which lines of code were executed by a test suite.
 - [Coveralls](https://coveralls.io) is a web service to help you track your code coverage over time, and ensure that all your new code is fully covered.
 
+### C++ Code Formatter
+
+- [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html) is a tool to automatically format C++ code.
+
 ### C++ Analysis Tools
 
 - [Codacy](https://app.codacy.com) is an automated code review platform.
