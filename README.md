@@ -12,6 +12,7 @@ This is a test project to find and check tools/packages/services which improve t
   <img alt="Coverity Scan Build Status"
        src="https://scan.coverity.com/projects/15851/badge.svg"/>
 </a>
+[![CodeFactor](https://www.codefactor.io/repository/github/smelanko/pocohttpwebserver/badge)](https://www.codefactor.io/repository/github/smelanko/pocohttpwebserver)
 
 [CppCon 2017: Rian Quinn “A Test a Day Keeps Your Manager Away!”](https://youtu.be/KdJhQuycD78)
 
@@ -49,6 +50,7 @@ This is a test project to find and check tools/packages/services which improve t
 ### C++ Analysis Tools
 
 - [Codacy](https://app.codacy.com) is an automated code review platform.
+- [CodeFactor](https://www.codefactor.io) seamlessly integrates with GitHub, instantly performs Code Review with every GitHub Commit or PR.
 - [Coverity](https://scan.coverity.com/dashboard) is a brand of software development products from Synopsys, consisting primarily of static code analysis and dynamic code analysis tools.
 - [CppCheck](http://cppcheck.sourceforge.net) is an analysis tool for C/C++ code. It detects the types of bugs that the compilers normally fail to detect.
 - [Clang-Tidy](http://apt.llvm.org/) is a clang-based C++ “linter” tool. Its purpose is to provide an extensible framework for diagnosing and fixing typical programming errors, like style violations, interface misuse, or bugs that can be deduced via static analysis.
