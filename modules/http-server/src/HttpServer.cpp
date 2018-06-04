@@ -55,8 +55,8 @@ int HttpServer::main(const std::vector<std::string>&)
         displayHelp();
     } else {
         // Get parameters from configuration file.
-        unsigned short port
-            = static_cast<unsigned short>(config().getInt("HTTPTimeServer.port", 80));
+        unsigned short port =
+            static_cast<unsigned short>(config().getInt("HTTPTimeServer.port", 80));
         int maxQueued = config().getInt("HTTPTimeServer.maxQueued", 100);
         int maxThreads = config().getInt("HTTPTimeServer.maxThreads", 16);
         Poco::ThreadPool::defaultPool().addCapacity(maxThreads);
