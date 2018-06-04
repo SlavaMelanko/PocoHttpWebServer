@@ -13,5 +13,5 @@ std::string GetCurrentDateTime(const std::string& format)
     return Poco::DateTimeFormatter::format(now, format);
 }
 
-}    // namespace chrono
-}    // namespace utils
+} // namespace chrono
+} // namespace utils

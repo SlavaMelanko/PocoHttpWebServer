@@ -22,6 +22,7 @@ This is a test project to find and check tools/packages/services which improve t
 - Orthogonality - make modules less cohesion
 - Reversibility
 - Respect all people who are or will be involved into project
+- Documentation is important
 
 ### Major Technologies
 
@@ -79,7 +80,7 @@ sudo apt-get install clang-6.0 lldb-6.0 clang-tools-6.0
 
 ### Specification
 
-- OpenAPI + Swagger (tools for implementing the specification)
+- [OpenAPI](https://swagger.io/specification/) + Swagger (tools for implementing the specification)
 
 ### Others
 

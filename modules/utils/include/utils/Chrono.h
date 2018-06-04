@@ -10,5 +10,5 @@ namespace chrono {
 /// Returns the current date and time according to the given format.
 std::string GetCurrentDateTime(const std::string& format = Poco::DateTimeFormat::SORTABLE_FORMAT);
 
-}    // namespace chrono
-}    // namespace utils
+} // namespace chrono
+} // namespace utils
