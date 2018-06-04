@@ -22,6 +22,7 @@ This is a test project to find and check tools/packages/services which improve t
 - Orthogonality - make modules less cohesion
 - Reversibility
 - Respect all people who are or will be involved into project
+- Documentation is important
 
 ### Major Technologies
 
@@ -46,6 +47,13 @@ This is a test project to find and check tools/packages/services which improve t
 
 - [Code Coverage](https://codecov.io) is a measurement used to express which lines of code were executed by a test suite.
 - [Coveralls](https://coveralls.io) is a web service to help you track your code coverage over time, and ensure that all your new code is fully covered.
+
+### C++ Code Formatter
+
+- [ClangFormat](https://clang.llvm.org/docs/ClangFormat.html) is a tool to automatically format C++ code.
+``` bash
+find modules -name '*.h' -or -name '*.cpp' | xargs -I {} sh -c 'echo {}; clang-format -style=file -i {};'
+```
 
 ### C++ Analysis Tools
 
@@ -72,7 +80,7 @@ sudo apt-get install clang-6.0 lldb-6.0 clang-tools-6.0
 
 ### Specification
 
-- OpenAPI + Swagger (tools for implementing the specification)
+- [OpenAPI](https://swagger.io/specification/) + Swagger (tools for implementing the specification)
 
 ### Others
 

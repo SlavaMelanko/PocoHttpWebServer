@@ -8,15 +8,14 @@
 
 #include "Version.h"
 
-void HeartbeatRequestHandler::handleRequest(Poco::Net::HTTPServerRequest& request,
-	Poco::Net::HTTPServerResponse& response)
+void HeartbeatRequestHandler::handleRequest(
+    Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response)
 {
-	auto& app = Poco::Util::Application::instance();
-	app.logger().information(
-		"Request from " + request.clientAddress().toString());
+    auto& app = Poco::Util::Application::instance();
+    app.logger().information("Request from " + request.clientAddress().toString());
 
-	response.setContentType("text/html");
+    response.setContentType("text/html");
 
-	std::ostream& ostr = response.send();
-	ostr << "v" << APP_VERSION;
+    std::ostream& ostr = response.send();
+    ostr << "v" << APP_VERSION;
 }

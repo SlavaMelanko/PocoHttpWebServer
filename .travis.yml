@@ -11,22 +11,6 @@ matrix:
     #
 
     #
-    # Xcode 8.0 Release.
-    #
-    - os: osx
-      env:
-        - CXX_COMPILER=clang++
-        - BUILD_TYPE=Release
-      osx_image: xcode8.0
-      compiler: clang
-      script:
-        - cd "${TRAVIS_BUILD_DIR}"
-        - mkdir -p build && cd build
-        - conan install .. --build missing -s build_type=${BUILD_TYPE}
-        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE} -- -j2
-
-    #
     # Xcode 9.0 Release.
     #
     - os: osx
@@ -45,47 +29,6 @@ matrix:
     ###########################################################################
     # GCC on Linux.
     #
-
-#    #
-#    # Git Check
-#    #
-#    - os: linux
-#      env:
-#        - JOB="Git Check"
-#      script:
-#        - |
-#          if [[ -n $(git diff --check HEAD^) ]]; then
-#            echo "You must remove whitespaces before submitting a pull request"
-#            echo ""
-#            git diff --check HEAD^
-#            exit -1
-#          fi
-
-    #
-    # GCC 5 Release.
-    #
-    - os: linux
-      env:
-        - JOB="GCC 5 Release"
-        - CC_COMPILER=gcc-5
-        - CXX_COMPILER=g++-5
-        - BUILD_TYPE=Release
-      addons: &gcc5
-        apt:
-          packages:
-            - gcc-5
-            - g++-5
-          sources:
-            - ubuntu-toolchain-r-test
-      script:
-        - cd "${TRAVIS_BUILD_DIR}"
-        - mkdir -p build && cd build
-        - |
-          conan install .. --build missing \
-            -s build_type=${BUILD_TYPE} \
-            -s compiler.libcxx=libstdc++11
-        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE} -- -j2
 
     #
     # GCC 6 Release.
