@@ -1,5 +1,8 @@
 # PocoHttpWebServer
 
+<img align="right" alt="pipecat" width="150"
+src="doc/imgs/logo.png" />
+
 This is a test project to find and check tools/packages/services which improve the quality, readability of code and reliable of the future product at all.
 
 [![GitHub version](https://badge.fury.io/gh/SMelanko%2FPocoHttpWebServer.svg)](https://badge.fury.io/gh/SMelanko%2FPocoHttpWebServer)
