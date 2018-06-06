@@ -1,18 +1,21 @@
 # PocoHttpWebServer
 
-This is a test project to find and check tools/packages/services which improve the quality, readability of code and reliable of the future product at all.
-
 [![GitHub version](https://badge.fury.io/gh/SMelanko%2FPocoHttpWebServer.svg)](https://badge.fury.io/gh/SMelanko%2FPocoHttpWebServer)
 [![Build Status: Linux, OSX](https://travis-ci.org/SMelanko/PocoHttpWebServer.svg?branch=master)](https://travis-ci.org/SMelanko/PocoHttpWebServer)
 [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/github/SMelanko/PocoHttpWebServer?branch=master&svg=true)](https://ci.appveyor.com/project/SMelanko/PocoHttpWebServer)
 [![codecov](https://codecov.io/gh/SMelanko/PocoHttpWebServer/branch/master/graph/badge.svg)](https://codecov.io/gh/SMelanko/PocoHttpWebServer)
 [![Coverage Status](https://coveralls.io/repos/github/SMelanko/PocoHttpWebServer/badge.svg?branch=master)](https://coveralls.io/github/SMelanko/PocoHttpWebServer?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f922034805584ab0be793eb87b13e1ab)](https://www.codacy.com/app/SMelanko/PocoHttpWebServer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SMelanko/PocoHttpWebServer&amp;utm_campaign=Badge_Grade)
 <a href="https://scan.coverity.com/projects/smelanko-pocohttpwebserver">
   <img alt="Coverity Scan Build Status"
        src="https://scan.coverity.com/projects/15851/badge.svg"/>
 </a>
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f922034805584ab0be793eb87b13e1ab)](https://www.codacy.com/app/SMelanko/PocoHttpWebServer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SMelanko/PocoHttpWebServer&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/smelanko/pocohttpwebserver/badge)](https://www.codefactor.io/repository/github/smelanko/pocohttpwebserver)
+
+<img align="right" alt="pipecat" width="150"
+src="doc/imgs/logo.png" />
+
+This is a test project to find and check tools/packages/services which improve the quality, readability of code and reliable of the future product at all.
 
 [CppCon 2017: Rian Quinn “A Test a Day Keeps Your Manager Away!”](https://youtu.be/KdJhQuycD78)
 
