@@ -1,10 +1,5 @@
 # PocoHttpWebServer
 
-<img align="right" alt="pipecat" width="150"
-src="doc/imgs/logo.png" />
-
-This is a test project to find and check tools/packages/services which improve the quality, readability of code and reliable of the future product at all.
-
 [![GitHub version](https://badge.fury.io/gh/SMelanko%2FPocoHttpWebServer.svg)](https://badge.fury.io/gh/SMelanko%2FPocoHttpWebServer)
 [![Build Status: Linux, OSX](https://travis-ci.org/SMelanko/PocoHttpWebServer.svg?branch=master)](https://travis-ci.org/SMelanko/PocoHttpWebServer)
 [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/github/SMelanko/PocoHttpWebServer?branch=master&svg=true)](https://ci.appveyor.com/project/SMelanko/PocoHttpWebServer)
@@ -16,6 +11,11 @@ This is a test project to find and check tools/packages/services which improve t
        src="https://scan.coverity.com/projects/15851/badge.svg"/>
 </a>
 [![CodeFactor](https://www.codefactor.io/repository/github/smelanko/pocohttpwebserver/badge)](https://www.codefactor.io/repository/github/smelanko/pocohttpwebserver)
+
+<img align="right" alt="pipecat" width="150"
+src="doc/imgs/logo.png" />
+
+This is a test project to find and check tools/packages/services which improve the quality, readability of code and reliable of the future product at all.
 
 [CppCon 2017: Rian Quinn “A Test a Day Keeps Your Manager Away!”](https://youtu.be/KdJhQuycD78)
 
