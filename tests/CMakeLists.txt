@@ -24,7 +24,7 @@ externalproject_add(
 # Exactly one source file must #define CATCH_CONFIG_MAIN before #include-ing Catch.
 # In this file do not write any test cases! In most cases that means this file will
 # just contain two lines (the #define and the #include). Keep all your test cases
-# in other files. This way you won't pay the recompilation cost for the whole of Catch.
+# in other files. This way you will not pay the recompilation cost for all Catch.
 add_library(catch2 STATIC Test.cpp)
 add_library(smela::catch2 ALIAS catch2)
 target_include_directories(catch2
@@ -43,6 +43,7 @@ function(do_test name library)
     )
     add_dependencies(${name} catch)
     add_test(NAME ${name} COMMAND $<TARGET_FILE:${name}>)
+    set_property(TARGET ${name} PROPERTY FOLDER "tests")
 endfunction()
 
 do_test(ChronoTest utils)
