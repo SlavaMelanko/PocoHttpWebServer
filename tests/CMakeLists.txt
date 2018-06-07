@@ -2,51 +2,43 @@
 project(tests CXX)
 
 list(APPEND CATCH_CMAKE_ARGS
-	"-DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/external"
-	"-DNO_SELFTEST=true"
+    "-DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/external"
+    "-DBUILD_TESTING=OFF"
 )
 
 # Add catch library as an external project.
 externalproject_add(
-	catch
-	# Root dir for entire project.
-	PREFIX ${CMAKE_BINARY_DIR}/catch
-	# URL of git repo.
-	GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-	# Git branch name, commit id or tag.
-	GIT_TAG v2.2.2
-	# Force Git to output progress information during the clone step.
-	GIT_PROGRESS 1
-	# Arguments to CMake command line.
-	CMAKE_ARGS ${CATCH_CMAKE_ARGS}
-	# Wrap download in script to log output.
-	LOG_DOWNLOAD 1
-	# Never update automatically from the remote repository.
-	UPDATE_DISCONNECTED 1
+    catch
+    # Root dir for entire project.
+    PREFIX ${CMAKE_BINARY_DIR}/catch
+    # URL of git repo.
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    # Git branch name, commit id or tag.
+    GIT_TAG v2.2.2
+    # Arguments to CMake command line.
+    CMAKE_ARGS ${CATCH_CMAKE_ARGS}
 )
 
-include_directories(catch-lib
-	${CMAKE_BINARY_DIR}/external/include
+# Build catch2 as library file to avoid slow compilation for each test.
+set(CATCH2_LIB catch2)
+add_library(${CATCH2_LIB} STATIC Test.cpp)
+add_library(smela::catch2 ALIAS ${CATCH2_LIB})
+target_include_directories(${CATCH2_LIB}
+    PUBLIC
+        ${CMAKE_BINARY_DIR}/external/include
 )
-
-add_library(catch-lib STATIC Test.cpp)
-add_dependencies(catch-lib catch)
+add_dependencies(${CATCH2_LIB} catch)
 
 function(do_test name)
-	include_directories(catch-lib
-		../modules/utils/include
-	)
-	add_executable(${name} ${name}.cpp)
-	target_link_libraries(${name}
-		utils
-		catch-lib
-	)
-	add_dependencies(${name}
-		catch
-	)
-	add_test(${name} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${name})
-	# Group all tests under tests directory.
-	set_property(TARGET ${name} PROPERTY FOLDER "tests")
+    add_executable(${name} ${name}.cpp)
+    target_link_libraries(${name}
+        smela::catch2
+        utils
+    )
+    add_dependencies(${name} catch)
+    add_test(${name} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${name})
+    # Group all tests under tests directory.
+    set_property(TARGET ${name} PROPERTY FOLDER "tests")
 endfunction()
 
 do_test(ChronoTest)
