@@ -1,12 +1,14 @@
 
 project(tests CXX)
 
-list(APPEND CATCH_CMAKE_ARGS
-    "-DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/external"
+set(CATCH2_INSTALL_PATH "${CMAKE_BINARY_DIR}/external/catch2")
+
+list(APPEND CATCH2_CMAKE_ARGS
+    "-DCMAKE_INSTALL_PREFIX=${CATCH2_INSTALL_PATH}"
     "-DBUILD_TESTING=OFF"
 )
 
-# Add catch library as an external project.
+# Add Catch2 library as an external project.
 externalproject_add(
     catch
     # Root dir for entire project.
@@ -16,29 +18,31 @@ externalproject_add(
     # Git branch name, commit id or tag.
     GIT_TAG v2.2.2
     # Arguments to CMake command line.
-    CMAKE_ARGS ${CATCH_CMAKE_ARGS}
+    CMAKE_ARGS ${CATCH2_CMAKE_ARGS}
 )
 
-# Build catch2 as library file to avoid slow compilation for each test.
-set(CATCH2_LIB catch2)
-add_library(${CATCH2_LIB} STATIC Test.cpp)
-add_library(smela::catch2 ALIAS ${CATCH2_LIB})
-target_include_directories(${CATCH2_LIB}
+# Exactly one source file must #define CATCH_CONFIG_MAIN before #include-ing Catch.
+# In this file do not write any test cases! In most cases that means this file will
+# just contain two lines (the #define and the #include). Keep all your test cases
+# in other files. This way you won't pay the recompilation cost for the whole of Catch.
+add_library(catch2 STATIC Test.cpp)
+add_library(smela::catch2 ALIAS catch2)
+target_include_directories(catch2
     PUBLIC
-        ${CMAKE_BINARY_DIR}/external/include
+        ${CATCH2_INSTALL_PATH}/include
 )
-add_dependencies(${CATCH2_LIB} catch)
+add_dependencies(catch2 catch)
 
-function(do_test name)
+# Performs actual test case.
+function(do_test name library)
     add_executable(${name} ${name}.cpp)
     target_link_libraries(${name}
-        smela::catch2
-        utils
+        PRIVATE
+            smela::catch2
+            smela::${library}
     )
     add_dependencies(${name} catch)
-    add_test(${name} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${name})
-    # Group all tests under tests directory.
-    set_property(TARGET ${name} PROPERTY FOLDER "tests")
+    add_test(NAME ${name} COMMAND $<TARGET_FILE:${name}>)
 endfunction()
 
-do_test(ChronoTest)
+do_test(ChronoTest utils)
