@@ -81,6 +81,10 @@ sudo apt-get install clang-6.0 lldb-6.0 clang-tools-6.0
 
 - [Docker](https://www.docker.com/) is a tool designed to make it easier to create, deploy, and run applications by using containers.
 
+### Documentation
+
+- [Doxygen](http://www.doxygen.org/) is a source code documentation and analysis tool.
+
 ### Specification
 
 - [OpenAPI](https://swagger.io/specification/) + Swagger (tools for implementing the specification)
