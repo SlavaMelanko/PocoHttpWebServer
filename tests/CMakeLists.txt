@@ -27,6 +27,14 @@ externalproject_add(
 # in other files. This way you will not pay the recompilation cost for all Catch.
 add_library(catch2 STATIC Test.cpp)
 add_library(smela::catch2 ALIAS catch2)
+target_compile_features(catch2 PUBLIC cxx_std_14)
+target_compile_options(catch2
+    PUBLIC
+        $<$<CXX_COMPILER_ID:MSVC>:
+            /EHsc /MP /W3 /Zf>
+        $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+            -pipe -march=native -O0 -Wall -Werror -Wextra>
+)
 target_include_directories(catch2
     PUBLIC
         ${CATCH2_INSTALL_PATH}/include

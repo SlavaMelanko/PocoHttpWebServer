@@ -16,8 +16,8 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 # Load and run CMake code from the file given.
-include(cotire)
-include(CxxCompilerOptions)
+#include(cotire)
+#include(CxxCompilerOptions)
 include(ExternalProject)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
