@@ -31,32 +31,6 @@ matrix:
     #
 
     #
-    # GCC 6 Release.
-    #
-    - os: linux
-      env:
-        - JOB="GCC 6 Release"
-        - CC_COMPILER=gcc-6
-        - CXX_COMPILER=g++-6
-        - BUILD_TYPE=Release
-      addons: &gcc6
-        apt:
-          packages:
-            - gcc-6
-            - g++-6
-          sources:
-            - ubuntu-toolchain-r-test
-      script:
-        - cd "${TRAVIS_BUILD_DIR}"
-        - mkdir -p build && cd build
-        - |
-          conan install .. --build missing \
-            -s build_type=${BUILD_TYPE} \
-            -s compiler.libcxx=libstdc++11
-        - cmake .. -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE}
-        - cmake --build . --config ${BUILD_TYPE} -- -j2
-
-    #
     # GCC 7 Release.
     #
     - os: linux
@@ -231,8 +205,6 @@ matrix:
         - CC_COMPILER=clang-5.0
         - CXX_COMPILER=clang++-5.0
         - BUILD_TYPE=Debug
-        - ENABLE_TESTING=TRUE
-        - ENABLE_ASAN=TRUE
       addons: &clang4
         apt:
           packages:
