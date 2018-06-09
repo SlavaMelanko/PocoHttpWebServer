@@ -21,6 +21,7 @@ This is a test project to find and check tools/packages/services which improve t
 
 ### Main Concepts
 
+- [Make Simple Tasks Simple!](https://youtu.be/nesCaocNjtQ)
 - The Evils of Duplication - do not repeat yourself (DRY)
 - Orthogonality - make modules less cohesion
 - Reversibility
