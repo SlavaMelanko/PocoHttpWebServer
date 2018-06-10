@@ -1,7 +1,6 @@
 version: 1.0.{build}
 
 image:
-  - Visual Studio 2015
   - Visual Studio 2017
 
 # Scripts that are called at very beginning, before repo cloning.
@@ -54,7 +53,7 @@ before_build:
         $env:generator="$env:generator Win64"
       }
       Write-Output generator="$env:generator"
-      
+
       if ($env:CONFIGURATION -eq "Release") {
         $env:vs_runtime="MT"
       } else {
