@@ -16,9 +16,11 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_14)
 target_compile_options(${PROJECT_NAME}
     PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
-            /EHsc /MP /W3 /Zf>
+            /MP /W3 /Zf
+            $<$<CONFIG:Debug>:/MTd>
+            $<$<CONFIG:Release>:/MT>>
         $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
-            -pipe -march=native -O0 -Wall -Werror -Wextra>
+            -Wall -Wextra -Werror -Wpedantic -pedantic-errors -pipe>
 )
 
 target_link_libraries(${PROJECT_NAME}
