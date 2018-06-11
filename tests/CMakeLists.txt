@@ -1,5 +1,9 @@
 
-project(tests CXX)
+cmake_minimum_required(VERSION 3.10)
+
+project(tests LANGUAGES CXX)
+
+include(ExternalProject)
 
 set(CATCH2_INSTALL_PATH "${CMAKE_BINARY_DIR}/external/catch2")
 
