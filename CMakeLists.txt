@@ -15,9 +15,6 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # to be loaded by the the include() or find_package() commands.
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
-# Load and run CMake code from the file given.
-#include(cotire)
-
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 # Set global include directories, libraries directories, definitions, etc.
 conan_basic_setup()

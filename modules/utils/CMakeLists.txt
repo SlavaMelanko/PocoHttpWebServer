@@ -35,5 +35,3 @@ target_link_libraries(${PROJECT_NAME}
     PUBLIC
         ${CONAN_LIBS}
 )
-
-#cotire(${PROJECT_NAME})

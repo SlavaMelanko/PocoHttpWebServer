@@ -27,5 +27,3 @@ target_link_libraries(${PROJECT_NAME}
     ${CONAN_LIBS}
     smela::utils
 )
-
-#cotire(${PROJECT_NAME})
