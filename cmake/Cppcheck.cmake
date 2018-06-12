@@ -9,6 +9,8 @@ if (NOT ENABLE_CPPCHECK)
 	return ()
 endif ()
 
+include(ExternalProject)
+
 list(APPEND CPPCHECK_CMAKE_ARGS
 	"-DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}"
 )

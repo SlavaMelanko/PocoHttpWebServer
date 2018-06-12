@@ -1,5 +1,9 @@
 
-project(tests CXX)
+cmake_minimum_required(VERSION 3.10)
+
+project(tests LANGUAGES CXX)
+
+include(ExternalProject)
 
 set(CATCH2_INSTALL_PATH "${CMAKE_BINARY_DIR}/external/catch2")
 
@@ -27,6 +31,16 @@ externalproject_add(
 # in other files. This way you will not pay the recompilation cost for all Catch.
 add_library(catch2 STATIC Test.cpp)
 add_library(smela::catch2 ALIAS catch2)
+target_compile_features(catch2 PUBLIC cxx_std_14)
+target_compile_options(catch2
+    PUBLIC
+        $<$<CXX_COMPILER_ID:MSVC>:
+            /MP /W3 /Zf
+            $<$<CONFIG:Debug>:/MTd>
+            $<$<CONFIG:Release>:/MT>>
+        $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+            -Wall -Wextra -Werror -Wpedantic -pedantic-errors -pipe>
+)
 target_include_directories(catch2
     PUBLIC
         ${CATCH2_INSTALL_PATH}/include
