@@ -24,6 +24,7 @@ if (ENABLE_COVERAGE)
 endif ()
 
 add_subdirectory(modules/http-server)
+add_subdirectory(modules/ms)
 add_subdirectory(modules/utils)
 
 if (ENABLE_TESTING)
